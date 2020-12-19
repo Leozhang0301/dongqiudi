@@ -1,0 +1,18 @@
+阿里云 账号：软件工程张翔
+密码：BANG0301@
+
+宝塔绑定账号：13123358739
+密码：zhangyixiang
+
+宝塔登录账号 dongqiudi
+密码：leozhang
+
+公网IP 8.129.27.254
+
+宝塔访问地址：http://8.129.27.254:8888/leozhang
+
+阿里云管理平台： 
+https://ecs.console.aliyun.com/?spm=5176.12818093.0.decs.488716d0JUTl01#/home
+
+数据库名 dongqiudi
+密码：dqdleo
