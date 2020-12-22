@@ -11,25 +11,45 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.client.R;
 import com.example.client.ui.news.NewsViewModel;
+import com.google.android.material.tabs.TabLayout;
 
 public class RankingFragment extends Fragment {
     private RankingViewModel rankingViewModel;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private MyFragmentAdapter myFragmentAdapter;
+
+    private TabLayout.Tab yingchaoTab;
+    private TabLayout.Tab yijiaTab;
+    private TabLayout.Tab xijiaTab;
+    private TabLayout.Tab dejiaTab;
+    private TabLayout.Tab zhongchaoTab;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rankingViewModel=new ViewModelProvider(this).get(RankingViewModel.class);
         View root=inflater.inflate(R.layout.fragment_ranking,container,false);
-        final TextView textView=root.findViewById(R.id.text_ranking);
-        rankingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                textView.setText(s);
-            }
-        });
+
+        viewPager=root.findViewById(R.id.ViewPager);
+        myFragmentAdapter=new MyFragmentAdapter(getFragmentManager());
+        viewPager.setAdapter(myFragmentAdapter);
+
+        tabLayout=root.findViewById(R.id.TabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        yingchaoTab=tabLayout.getTabAt(0);
+        yijiaTab=tabLayout.getTabAt(1);
+        xijiaTab=tabLayout.getTabAt(2);
+        dejiaTab=tabLayout.getTabAt(3);
+        zhongchaoTab=tabLayout.getTabAt(4);
+
         return root;
     }
+
+
 }
