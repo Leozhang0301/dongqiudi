@@ -1,7 +1,8 @@
 import json, flask
-from flask import request
+from flask import request,Markup
 import pymysql
 from sshtunnel import SSHTunnelForwarder
+from flask_cors import CORS
 
 # # 使用ssh远程连接云服务器
 # server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
@@ -22,10 +23,20 @@ from sshtunnel import SSHTunnelForwarder
 # cursor = db.cursor()
 
 app = flask.Flask(__name__)
+CORS(app, resources=r'/*')
 
 
-@app.route('/queryrank')
-def login():
+@app.route('/publish', methods=['post', 'get'])
+def publish():
+    print(request.headers)
+    print(request.form)
+    print(request.form['new_content'])
+    return '成功'
+
+
+# 注册
+@app.route('/register')
+def register():
     # 获取请求
     # 使用ssh远程连接云服务器
     server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
@@ -45,7 +56,107 @@ def login():
 
     cursor = db.cursor()
 
-    app = flask.Flask(__name__)
+    accont = request.values.get('accont')
+    password = request.values.get('pwd')
+    name = request.values.get('name')
+    print(accont, password, name)
+    sql = "select * from user where ACCONT = \'%s\'" % accont
+    cursor.execute(sql)
+    print(sql)
+    data = cursor.fetchall()
+    if data != ():
+        return '账户已存在'
+    else:
+        sql = "select * from user where NAME=\'%s\'" % name
+        print(sql)
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        if data != ():
+            return '用户名已使用'
+        else:
+            sql = "INSERT INTO `user`(`ACCONT`, `PASSWORD`, `NAME`, `CREATE_DATE`) VALUES (\'%s\',\'%s\',\'%s\',now())" % (
+                accont, password, name)
+            print(sql)
+            cursor.execute(sql)
+            db.commit()
+            print(cursor.fetchall())
+            return '成功'
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+
+
+# 判断账户密码
+@app.route('/checkuser')
+def checkuser():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    userName = request.values.get('username')
+    password = request.values.get('pwd')
+    sql = "select PASSWORD from user where ACCONT =\'%s\'" % userName
+    cursor.execute(sql)
+    realPwd = cursor.fetchall()
+    print(realPwd)
+    if realPwd == ():
+        return '用户不存在'
+    else:
+        realPwd = realPwd[0][0]
+        print(realPwd)
+        if realPwd != password:
+            return '密码错误'
+        elif realPwd == password:
+            return '密码正确'
+        else:
+            return '123'
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+
+
+# 查询排行榜
+@app.route('/queryrank')
+def queryrank():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    # app = flask.Flask(__name__)
 
     table_name = request.values.get('tablename')
     sql = ""

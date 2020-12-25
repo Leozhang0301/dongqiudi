@@ -2,28 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/MyFragmentAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/XiJiaRankFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/YiJiaRankFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/YingChaoRankFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/ZhongChaoRankFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_dejia.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_xijia.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_yijia.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_yingchao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_zhongchao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/LoginActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/RegisterActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/ImagesBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItemAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/TuchongEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/drawable/login_button.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_register.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/news_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankingFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_ranking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_ranking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -43,8 +43,8 @@ public class RankingFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         yingchaoTab=tabLayout.getTabAt(0);
-        yijiaTab=tabLayout.getTabAt(1);
         xijiaTab=tabLayout.getTabAt(2);
+        yijiaTab=tabLayout.getTabAt(1);
         dejiaTab=tabLayout.getTabAt(3);
         zhongchaoTab=tabLayout.getTabAt(4);
 

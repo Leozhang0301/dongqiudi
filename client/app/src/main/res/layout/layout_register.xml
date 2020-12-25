@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TableLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/top"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+        <TableRow>
+            <TextView android:text="user name:"/>
+            <EditText android:hint="please input user name"
+                android:id="@+id/user"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="password:"/>
+            <EditText android:hint="please input password"
+                android:id="@+id/pw"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="check:"/>
+            <EditText android:hint="please check your password"
+                android:id="@+id/check"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="nick name:"/>
+            <EditText android:hint="please check your nick name"
+                android:id="@+id/name"/>
+        </TableRow>
+
+
+
+    </TableLayout>
+    <TableLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,3"
+        android:layout_below="@+id/top"
+        >
+        <TableRow>
+            <TextView />
+            <Button android:text="ready"
+                android:id="@+id/ready"
+                android:layout_marginRight="20dp"/>
+            <Button android:text="reset"
+                android:id="@+id/reset"
+                android:onClick="resetClick"
+                android:layout_marginLeft="20dp"/>
+            <TextView />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

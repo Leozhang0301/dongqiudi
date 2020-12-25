@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout_banner"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.news.NewsFragment">
-
-    <TextView
-        android:id="@+id/text_news"
+    android:orientation="vertical">
+    <com.stx.xhb.androidx.XBanner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="180dp"
+        android:id="@+id/image_banner"
+        android:scaleType="center"/>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/news_list"
+        android:layout_width="match_parent"
+        android:layout_height="536dp" />
+</LinearLayout>

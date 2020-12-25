@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.client.R;
@@ -43,6 +44,7 @@ public class RankItemAdapter extends BaseAdapter {
             viewHolder=new ViewHolder();
             //绑定
             viewHolder.paiming=(TextView)convertView.findViewById(R.id.paiming);
+            viewHolder.team_icon=(ImageView)convertView.findViewById(R.id.team_icon);
             viewHolder.qiudui=(TextView)convertView.findViewById(R.id.qiudui);
             viewHolder.changci=(TextView)convertView.findViewById(R.id.changci);
             viewHolder.sheng=(TextView)convertView.findViewById(R.id.sheng);
@@ -68,6 +70,7 @@ public class RankItemAdapter extends BaseAdapter {
     }
     static class ViewHolder{
         TextView paiming;
+        ImageView team_icon;
         TextView qiudui;
         TextView changci;
         TextView sheng;

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class DeJiaRankFragment extends Fragment {
+    private TextView leagueRule;
     private ImageView team_icon;
     private String URL="http://8.129.27.254:8000/queryrank?tablename=dejia";
     private OkHttpClient client=new OkHttpClient();
@@ -58,14 +60,34 @@ public class DeJiaRankFragment extends Fragment {
         View root=inflater.inflate(R.layout.rank_list,container,false);
         listView=root.findViewById(R.id.rank_team);
         team_icon=root.findViewById(R.id.team_icon);
+        leagueRule=root.findViewById(R.id.league_rules);
         rankItemList=new LinkedList<>();
         GetData();
+        setRule();
 
         //加入数据
         //rankItemList.add(new RankItem("1","河南建业","0","0","0", "0","0","0","0"));
 
 
         return root;
+    }
+
+    private void setRule() {
+        String rule="2020-2021德甲联赛幂次决定方法：\n"+
+                "德国甲级联赛共由18支参赛球队组成，主客场双循环赛制制作赛，每场赛事"+
+                "胜者得3分，平局两队各得1分，负者不得分，34轮过后以积分多少决定最终排名。"+
+                "若同分则依次以下列方式决定排名:\n"+
+                "a) 净胜球多者，名次列前；\n"+
+                "b) 进球多者，名次列前；\n"+
+                "c) 相互对阵积分多者，名次列前；\n"+
+                "d）相互对阵净胜球多者，名次列前；\n"+
+                "e）相互对阵客场进球多者，名次列前；\n"+
+                "f）客场进球多者，名次列前；\n"+
+                "g）附加赛决定排名。\n"+
+                "\n"+
+                "欧战&升降级名额：";
+        leagueRule.setText(rule);
+
     }
 
     private void GetData(){
