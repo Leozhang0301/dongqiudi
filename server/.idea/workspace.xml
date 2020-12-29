@@ -2,27 +2,72 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/LoginActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/RegisterActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/ImagesBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItemAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/TuchongEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/drawable/login_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_login.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_register.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/news_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchItemAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_news.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/match_list_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/matches_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GetMatches.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchesFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankingFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_matches.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_matches.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/news_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/news_list_item.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/rank_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/css/el-index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/editor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/js/el-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/js/qs.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/js/vue-cookies.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/js/vue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/js/wangEditor.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/base64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/aes/aes-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/aes/aes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/cbc/cbc-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/cbc/cbc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-1.0.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-md5/crypto-md5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha1-hmac-pbkdf2-marc4/crypto-sha1-hmac-pbkdf2-marc4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha1-hmac-pbkdf2-ofb-aes/crypto-sha1-hmac-pbkdf2-ofb-aes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha1-hmac-pbkdf2-rabbit/crypto-sha1-hmac-pbkdf2-rabbit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha1-hmac-pbkdf2/crypto-sha1-hmac-pbkdf2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha1/crypto-sha1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto-sha256/crypto-sha256.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto/crypto-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/crypto/crypto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/hmac/hmac-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/hmac/hmac.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/marc4/marc4-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/marc4/marc4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/md5/md5-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/md5/md5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/ofb/ofb-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/ofb/ofb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/pbkdf2/pbkdf2-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/pbkdf2/pbkdf2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/rabbit/rabbit-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/rabbit/rabbit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/sha1/sha1-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/sha1/sha1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/sha256/sha256-min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/crypto1/sha256/sha256.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/Moxie.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/Moxie.xap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/moxie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/moxie.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/plupload.dev.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/plupload.full.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/js/plupload.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/lib/plupload-2.1.2/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/publish/upload.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +105,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.query">
+    <configuration name="GetMatches" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="server" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GetMatches.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GetNewestData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,6 +192,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.query" />
+        <item itemvalue="Python.GetMatches" />
         <item itemvalue="Python.GetNewestData" />
         <item itemvalue="Python.test" />
       </list>

@@ -6,16 +6,9 @@
 
 
     <ListView
-        android:id="@+id/rank_team"
+        android:id="@+id/match_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/league_rules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
 
 
 </LinearLayout>

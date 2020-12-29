@@ -1,9 +1,11 @@
 package com.example.client.ui.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,22 +49,36 @@ public class NewsFragment extends Fragment {
         initBanner();
         loadData();
         setData();
+        newslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent();
+                Bundle bundle=new Bundle();
+                bundle.putInt("position",position);
+                //新建一个newitem对象来获取点击的对象
+                NewsItem item=(NewsItem) newsItems.get(position);
+                bundle.putString("url",item.getUrl());
+                intent.putExtras(bundle);
+                intent.setClass(getActivity(),NewsActivity.class);
+                startActivity(intent);
+            }
+        });
         //list.add()
         //xBanner.setBannerData();
         return root;
     }
 
     private void setData(){
-        newsItems.add(new NewsItem("国内媒体:李晓鹏将执教武汉卓尔","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题2","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题3","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
-        newsItems.add(new NewsItem("这是新闻标题4","这是新闻发布时间",R.mipmap.ic_launcher));
+        newsItems.add(new NewsItem("英超战报：利物浦1-1西布朗，马内破门，马蒂普伤退","12-28 02:20",R.drawable.first,"https://www.dongqiudi.com/news/1758080.html"));
+        newsItems.add(new NewsItem("梅西：冬窗不会与其他球队谈判；巴萨就是我的生命","12-28 05:11",R.drawable.second,"https://www.dongqiudi.com/news/1758176.html"));
+        newsItems.add(new NewsItem("C罗：希望有一天我进球时，全世界的孩子们都会欢呼","12-28 02:31",R.drawable.third,"https://www.dongqiudi.com/news/1758096.html"));
+        newsItems.add(new NewsItem("意媒：马尔库特不在那不勒斯的计划中，1月可能被清洗","12-28 10:29",R.drawable.forth,"https://www.dongqiudi.com/news/1758371.html"));
+        newsItems.add(new NewsItem("挂帅武汉卓尔！李霄鹏：这是一种缘分”","12-28 00:13",R.drawable.fifth,"https://www.dongqiudi.com/news/1758017.html"));
+        newsItems.add(new NewsItem("颜骏凌：我的眼伤已经基本上没问题，准备好回归球场","12-27 21:23",R.drawable.sixth,"https://www.dongqiudi.com/news/1757809.html"));
+        newsItems.add(new NewsItem("奥拉罗尤：不排除未来去欧洲执教，只要报价合适都会考虑","12-27 22:49",R.drawable.seventh,"https://www.dongqiudi.com/news/1757918.html"));
+        newsItems.add(new NewsItem("伊布：只有马拉多纳比我更强；也许在未来我会成为教练","12-27 19:27",R.drawable.eighth,"https://www.dongqiudi.com/news/1757679.html"));
+        newsItems.add(new NewsItem("蒿俊闵参加公益赛获队友盛赞：他很快就适应了我们的打法","12-27 23:28",R.drawable.nineth,"https://www.dongqiudi.com/news/1757967.html"));
+        newsItems.add(new NewsItem("韩媒：深足后卫宋株熏已同意加盟济州联","12-27 19:07",R.drawable.tenth,"https://www.dongqiudi.com/news/1757666.html"));
         itemAdapter=new NewsItemAdapter((LinkedList<NewsItem>)newsItems,getActivity());
         newslist.setAdapter(itemAdapter);
     }

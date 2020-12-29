@@ -15,7 +15,7 @@
             android:layout_marginTop="0dp"
             android:text="新闻标题"
             android:id="@+id/news_title"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:text="新闻发布时间" />
     </LinearLayout>
     <ImageView

@@ -1,5 +1,5 @@
 import json, flask
-from flask import request,Markup
+from flask import request, Markup
 import pymysql
 from sshtunnel import SSHTunnelForwarder
 from flask_cors import CORS
@@ -26,15 +26,105 @@ app = flask.Flask(__name__)
 CORS(app, resources=r'/*')
 
 
+@app.route('/getmatches', methods=['get'])
+def getMatches():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    sql = "select * from matches"
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    results = []
+    for data in datas:
+        dict = {'日期': data[1], '时间': data[2], '主队': data[3], '客队': data[4], '比分': data[5], '联赛': data[6]}
+        # print(dict)
+        results.append(dict)
+    print(results)
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
+
+# 发布新闻
+# 方法：POST
+# 参数：无
+# 返回：‘成功’
 @app.route('/publish', methods=['post', 'get'])
 def publish():
     print(request.headers)
     print(request.form)
     print(request.form['new_content'])
+    print(type(request.form['new_content']))
+    # string = "<p>hello</p>"
+    # new_title='hello'
+    file = open('/www/wwwroot/8.129.27.254/news/' + request.form['new_title'] + '.html', 'w', encoding='utf-8')
+    # file = open('%s.html' % new_title, 'w', encoding='utf-8')
+    file.write(request.form['new_content'])
+    # file.write(string)
+    print(file)
+    file.close()
+
+    # 插入数据库
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    news_title = request.form['new_title']
+    news_path = news_title + '.html'
+    sql = "INSERT INTO `news`(`NEWS_TITLE`, `NEWS_CONTENT`, `PUBLISH_DATA`) VALUES (\'%s\',\'%s\',now())" % (
+        news_title, news_path)
+    print(sql)
+    print(news_path)
+    cursor.execute(sql)
+    db.commit()
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
     return '成功'
 
 
-# 注册
+# 用户注册
+# 方法：GET
+# 参数：accont:用户账号
+#       pwd：用户密码
+#       name：用户名称
+# 返回：‘账户已存在’
+#       '用户名已使用'
+#       '成功'
 @app.route('/register')
 def register():
     # 获取请求
@@ -89,6 +179,12 @@ def register():
 
 
 # 判断账户密码
+# 方法：GET
+# 参数：username:账户
+#       pwd：密码
+# 返回：'用户不存在'
+#       '密码错误'
+#       '密码正确'
 @app.route('/checkuser')
 def checkuser():
     # 获取请求
@@ -135,6 +231,9 @@ def checkuser():
 
 
 # 查询排行榜
+# 方法：GET
+# 参数：tablename:表名
+# 返回：json
 @app.route('/queryrank')
 def queryrank():
     # 获取请求
@@ -192,17 +291,20 @@ def queryrank():
                       '进球': data[6], '失球': data[7],
                       '净胜球': data[8], '积分': data[9]}
             results.append(result)
+            # 关闭数据库连接
+            cursor.close()
+            db.close()
+            server.close()
         return json.dumps(results, ensure_ascii=False)
 
 
     else:
         resu = {'code': 1001, 'message': '参数不能为空'}
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
         return json.dumps(resu, ensure_ascii=False)
-
-    # 关闭数据库连接
-    cursor.close()
-    db.close()
-    server.close()
 
 
 @app.route('/index')

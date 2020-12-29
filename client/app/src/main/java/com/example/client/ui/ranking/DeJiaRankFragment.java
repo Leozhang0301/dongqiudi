@@ -40,7 +40,6 @@ public class DeJiaRankFragment extends Fragment {
     private TextView leagueRule;
     private ImageView team_icon;
     private String URL="http://8.129.27.254:8000/queryrank?tablename=dejia";
-    private OkHttpClient client=new OkHttpClient();
 
     private Handler handler=new Handler(){
         @Override

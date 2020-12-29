@@ -6,11 +6,19 @@ public class NewsItem {
     private String title;
     private String publishTime;
     private int coverID;
+    private String url;
 
-    public NewsItem(String title, String publishTime, int first_pic) {
+    public NewsItem(String title, String publishTime, int coverID, String url) {
         this.title = title;
         this.publishTime = publishTime;
-        this.coverID = first_pic;
+        this.coverID = coverID;
+        this.url = url;
+    }
+
+    public NewsItem(String title, String publishTime, int coverID) {
+        this.title = title;
+        this.publishTime = publishTime;
+        this.coverID = coverID;
     }
 
     public String getTitle() {
@@ -40,5 +48,13 @@ public class NewsItem {
 
     public void setCoverID(int coverID) {
         this.coverID = coverID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

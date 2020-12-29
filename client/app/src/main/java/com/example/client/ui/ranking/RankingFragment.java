@@ -18,7 +18,6 @@ import com.example.client.ui.news.NewsViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class RankingFragment extends Fragment {
-    private RankingViewModel rankingViewModel;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MyFragmentAdapter myFragmentAdapter;
@@ -32,7 +31,6 @@ public class RankingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rankingViewModel=new ViewModelProvider(this).get(RankingViewModel.class);
         View root=inflater.inflate(R.layout.fragment_ranking,container,false);
 
         viewPager=root.findViewById(R.id.ViewPager);
