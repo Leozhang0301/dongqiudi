@@ -107,8 +107,7 @@ public class ZhongChaoRankFragment extends Fragment {
                                 String jifen=jsonObject.getString("积分");
                                 //获得队标
                                 String icon_url ="http://8.129.27.254/image/team_icon/"+qiudui+".png";
-                                RequestBuilder<Drawable> team_image=Glide.with(getActivity()).load(icon_url);
-                                rankItemList.add(new RankItem(paiming,team_image,qiudui,changci,sheng,ping,fu,jinqiu,shiqiu,jifen));
+                                rankItemList.add(new RankItem(paiming,icon_url,qiudui,changci,sheng,ping,fu,jinqiu,shiqiu,jifen));
                                 Log.d("kwwl",jsonObject.toString());
 
                             }

@@ -7,7 +7,7 @@ import com.bumptech.glide.RequestBuilder;
 
 public class RankItem {
     private String paiming;
-    private RequestBuilder<Drawable> team_icon;
+    private String getIconURL;
     private String qiudui;
     private String changci;
     private String sheng;
@@ -17,9 +17,9 @@ public class RankItem {
     private String shiqiu;
     private String jifen;
 
-    public RankItem(String paiming, RequestBuilder<Drawable> team_icon, String qiudui, String changci, String sheng, String ping, String fu, String jinqiu, String shiqiu, String jifen) {
+    public RankItem(String paiming, String team_icon, String qiudui, String changci, String sheng, String ping, String fu, String jinqiu, String shiqiu, String jifen) {
         this.paiming = paiming;
-        this.team_icon=team_icon;
+        this.getIconURL=team_icon;
         this.qiudui = qiudui;
         this.changci = changci;
         this.sheng = sheng;
@@ -38,12 +38,12 @@ public class RankItem {
         this.paiming = paiming;
     }
 
-    public RequestBuilder<Drawable> getTeam_icon() {
-        return team_icon;
+    public String getGetIconURL() {
+        return getIconURL;
     }
 
-    public void setTeam_icon(RequestBuilder<Drawable> team_icon) {
-        this.team_icon = team_icon;
+    public void setGetIconURL(String getIconURL) {
+        this.getIconURL = getIconURL;
     }
 
     public String getQiudui() {
