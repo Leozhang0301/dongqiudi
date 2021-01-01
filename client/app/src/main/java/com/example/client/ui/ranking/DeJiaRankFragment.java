@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,8 +72,9 @@ public class DeJiaRankFragment extends Fragment {
         return root;
     }
 
+    //设置联赛规则
     private void setRule() {
-        String rule="2020-2021德甲联赛幂次决定方法：\n"+
+        String rule="2020-2021德甲联赛名次决定方法：\n"+
                 "德国甲级联赛共由18支参赛球队组成，主客场双循环赛制制作赛，每场赛事"+
                 "胜者得3分，平局两队各得1分，负者不得分，34轮过后以积分多少决定最终排名。"+
                 "若同分则依次以下列方式决定排名:\n"+
@@ -84,11 +86,16 @@ public class DeJiaRankFragment extends Fragment {
                 "f）客场进球多者，名次列前；\n"+
                 "g）附加赛决定排名。\n"+
                 "\n"+
-                "欧战&升降级名额：";
+                "欧战&升降级名额：\n"+
+                "（一）联赛前4名直接参加下赛季欧冠联赛\n"+
+                "（二）第5名参加下赛季欧联杯，第六名参加下赛季欧洲协会联赛附加赛\n"+
+                "（三）德国杯冠军可参加欧联杯，如其已获得欧战资格，则名额让给联赛未获得欧战资格中排名靠前的球队\n"+
+                "（四）若欧冠，欧联冠军都是德甲球队，且两支球队都未通过联赛获得欧冠资格，则第4名参加欧联杯\n"+
+                "（五）排名最后2名的球队降入德乙联赛，排名倒数第3名的球队和德乙第3名进行主客场两回合的升降级附加赛决定下赛季德甲参赛名额";
         leagueRule.setText(rule);
 
     }
-
+    //网络请求获取排名积分
     private void GetData(){
         OkHttpClient okHttpClient=new OkHttpClient.Builder()
                 .connectTimeout(8000, TimeUnit.MILLISECONDS)
@@ -133,6 +140,7 @@ public class DeJiaRankFragment extends Fragment {
                             }
                             rankItemAdapter=new RankItemAdapter((LinkedList<RankItem>)rankItemList,getActivity());
                             listView.setAdapter(rankItemAdapter);
+                            getListViewSelfHeight(listView);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -142,5 +150,20 @@ public class DeJiaRankFragment extends Fragment {
             }
         });
 
+    }
+
+    //重写onMeasured方法
+    //解决scrollView嵌套listView不能显示完全的错误
+    public void getListViewSelfHeight(ListView listView){
+        ListAdapter listAdapter=listView.getAdapter();
+        int totalHeight=0;
+        for(int i=0;i<listAdapter.getCount();i++){
+            View listItem=listAdapter.getView(i,null,listView);
+            listItem.measure(0,0);
+            totalHeight+=listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params=listView.getLayoutParams();
+        params.height=totalHeight+(listView.getDividerHeight()*(listAdapter.getCount()-1));
+        listView.setLayoutParams(params);
     }
 }

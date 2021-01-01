@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -111,6 +112,7 @@ public class YiJiaRankFragment extends Fragment {
                             }
                             rankItemAdapter=new RankItemAdapter((LinkedList<RankItem>)rankItemList,getActivity());
                             listView.setAdapter(rankItemAdapter);
+                            getListViewSelfHeight(listView);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -120,5 +122,20 @@ public class YiJiaRankFragment extends Fragment {
             }
         });
 
+    }
+
+    //重写onMeasured方法
+    //解决scrollView嵌套listView不能显示完全的错误
+    public void getListViewSelfHeight(ListView listView){
+        ListAdapter listAdapter=listView.getAdapter();
+        int totalHeight=0;
+        for(int i=0;i<listAdapter.getCount();i++){
+            View listItem=listAdapter.getView(i,null,listView);
+            listItem.measure(0,0);
+            totalHeight+=listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params=listView.getLayoutParams();
+        params.height=totalHeight+(listView.getDividerHeight()*(listAdapter.getCount()-1));
+        listView.setLayoutParams(params);
     }
 }
