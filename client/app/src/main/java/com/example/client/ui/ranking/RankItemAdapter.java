@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.client.MainActivity;
 import com.example.client.R;
 
 import java.io.IOException;
@@ -31,17 +32,18 @@ public class RankItemAdapter extends BaseAdapter {
     public RankItemAdapter(LinkedList<RankItem> linkedList, Context context) {
         this.linkedList = linkedList;
         this.context = context;
-        //设置缓存大小为最大缓存的1/8
-        int maxCache=(int)Runtime.getRuntime().maxMemory();
-        int cacheSize=maxCache/8;
-        mImageCache=new LruCache<String, BitmapDrawable>(cacheSize){
-            //重写缓存大小计算公式
-            //以图片大小计算缓存
-            @Override
-            protected int sizeOf(String key, BitmapDrawable value) {
-                return value.getBitmap().getByteCount();
-            }
-        };
+//        //设置缓存大小为最大缓存的1/8
+//        int maxCache=(int)Runtime.getRuntime().maxMemory();
+//        int cacheSize=maxCache/8;
+//        mImageCache=new LruCache<String, BitmapDrawable>(cacheSize){
+//            //重写缓存大小计算公式
+//            //以图片大小计算缓存
+//            @Override
+//            protected int sizeOf(String key, BitmapDrawable value) {
+//                return value.getBitmap().getByteCount();
+//            }
+//        };
+        mImageCache= MainActivity.mImageCache;
     }
 
     @Override

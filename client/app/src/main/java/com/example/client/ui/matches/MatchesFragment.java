@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class MatchesFragment extends Fragment {
     private List<MatchItem> matchItems;
     private MatchItemAdapter matchItemAdapter;
     private JSONArray jsonArray;
+    private ImageView homeTeamIcon;
+    private ImageView awayTeamIcon;
 
 
 
@@ -48,6 +51,8 @@ public class MatchesFragment extends Fragment {
         View root=inflater.inflate(R.layout.fragment_matches,container,false);
         matchesList=(ListView)root.findViewById(R.id.matches_list);
         matchItems=new LinkedList<>();
+        homeTeamIcon=(ImageView)root.findViewById(R.id.home_team_icon);
+        awayTeamIcon=(ImageView)root.findViewById(R.id.away_team_icon);
         GetData();
         return root;
 
@@ -85,7 +90,11 @@ public class MatchesFragment extends Fragment {
                                 String homeTeam=jsonObject.getString("主队");
                                 String result=jsonObject.getString("比分");
                                 String awayTeam=jsonObject.getString("客队");
-                                matchItems.add(new MatchItem(date,time,homeTeam,awayTeam,result,league));
+                                //获得队标
+                                String homeTeamIcon ="http://8.129.27.254/image/team_icon/"+homeTeam+".png";
+                                //获得队标
+                                String awayTeamIcon ="http://8.129.27.254/image/team_icon/"+awayTeam+".png";
+                                matchItems.add(new MatchItem(date,time,homeTeam,awayTeam,result,league,homeTeamIcon,awayTeamIcon));
                                 Log.d("kwwl",jsonObject.toString());
                             }
                             matchItemAdapter=new MatchItemAdapter((LinkedList<MatchItem>)matchItems,getActivity());

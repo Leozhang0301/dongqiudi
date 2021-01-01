@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link type="text/css" href="css/el-index.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+
+		<script src="js/vue.js"></script>
+		<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+		<script src="js/qs.min.js"></script>
+		<script src="js/el-index.js"></script>
+		<script src="js/vue-cookies.js"></script>
+		<title></title>
+		<style>
+			.w-e-text-container{
+			    height: 550px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
+			}
+			.progress{
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width: 100%;height: 80%;">
+			<div id="editor" style="width:80%;display: inline-block;">
+			</div>
+			<div style="width: 20%;display: inline-block;text-align: center;position: absolute;overflow-y: scroll;height: 600px;">
+				<form name=theform>
+					<input style="display: none;" type="radio" name="myradio" value="random_name" checked="true"/>
+					<br/>
+				</form>
+
+				<h4>您所选择的文件列表：</h4>
+				<div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+				<br/>
+				<div id="container">
+					<a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+					<a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+				</div>
+			</div>
+		</div>
+		<div id="main" style="margin-top: 20px;">
+			<el-row style="margin-bottom: 20px;">
+				<el-col>
+					<el-radio v-for="(item,index) in modulars" v-model="choose_modular_radio" :label="item.FORUM_ID" :key="index" >{{item.FORUM_NAME}}</el-radio>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="2">
+					<el-button @click="preview">预览</el-button>
+				</el-col>
+				<el-col :span="9" :offset="1">
+					标题<el-input type="text" v-model="title" style="width: 80%;"></el-input>
+				</el-col>
+				<el-col :span="12">
+					<el-button-group style="float: right;">
+						<el-button @click="cancel_btn">取消</el-button>
+						<el-button style="margin-left: 20px;" type="primary" @click="publish_btn">发布</el-button>
+					</el-button-group>
+				</el-col>
+			</el-row>
+			
+			<pre id="console"></pre>
+		</div>
+			
+
+		<script type="text/javascript" src="lib/crypto1/crypto/crypto.js"></script>
+		<script type="text/javascript" src="lib/crypto1/hmac/hmac.js"></script>
+		<script type="text/javascript" src="lib/crypto1/sha1/sha1.js"></script>
+		<script type="text/javascript" src="lib/base64.js"></script>
+		<script type="text/javascript" src="lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+		<script type="text/javascript" src="upload.js"></script>
+		<script type="text/javascript" src="js/clipboard.min.js"></script>
+	</body>
+</html>
+<script src="js/wangEditor.min.js"></script>
+<script>
+	new ClipboardJS('.btn_copy')
+	var E = window.wangEditor;
+	var editor = new E('#editor');
+	editor.create(); 
+	var vm_main = new Vue({
+		el:"#main",
+		data:{
+			what:"vm_main1",
+			username:"",
+			useridentity:"",
+			token:"",
+			modulars:null,
+			choose_modular_radio:null,
+			title:null,
+			content:null
+		},
+		created:function(){
+			
+			if(this.$cookies.isKey("username")&&this.$cookies.isKey("useridentity")&&this.$cookies.isKey("token"))
+			{
+				this.username = this.$cookies.get("username");
+				this.useridentity = this.$cookies.get("useridentity");
+				this.token = this.$cookies.get("token");
+				console.log(this.username,this.useridentity,this.token);
+				this.query_modulars();
+			}
+		},
+		methods:{
+			publish_time:function(){
+				Date.prototype.Format = function (fmt) { //author: meizz
+				    var o = {
+				        "M+": this.getMonth() + 1, //月份 
+				        "d+": this.getDate(), //日 
+				        "H+": this.getHours(), //小时 
+				        "h+": this.getHours(), //小时 
+				        "m+": this.getMinutes(), //分 
+				        "s+": this.getSeconds(), //秒 
+				        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+				        "S": this.getMilliseconds() //毫秒 
+				    };
+				    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				    for (var k in o)
+				    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				    return fmt;
+				}
+				return (new Date()).Format("yyyy-MM-dd hh:mm:ss");
+			},
+			preview:function(){
+				this.content = editor.txt.html()
+				console.log(this.content);
+				if(!this.title)
+				{
+					alert("请先输入标题阿!"+(new Date()).Format("yyyy-MM-dd hh:mm:ss"));
+					console.log();
+				}
+				else if(!this.choose_modular_radio)
+				{
+					alert("请先选择版块!")
+				}
+				else if(!this.content)
+				{
+					alert("请先输入内容!")
+				}
+				else{
+					this.$cookies.set("forum_id",this.choose_modular_radio);
+					this.$cookies.set('title',this.title);
+					this.$cookies.set('publish_time',this.publish_time());
+					/* this.$cookies.set('content',this.content); cookie存的东西少，不能用*/
+					window.localStorage.setItem("content",this.content);
+				window.open("newsmodel.html");
+				}
+			},
+			query_modulars:function(){
+				var that = this;
+				axios.get("https://www.122yici.xin/sjz/admin/forum/getmine",
+				{
+					headers : {
+					"Authorization" : "Bearer "+that.token	
+					},
+				}
+				).then(function(response){
+					that.modulars = response.data;
+					console.log(response.data);
+				}).catch(function(error)
+				{
+					console.log(error);
+					alert("获取当前用户的管理版块，未知错误，请联系管理员!");
+				});
+			},
+			cancel_btn:function(){
+				if(confirm("取消将清空编辑器内容并无法恢复?"))
+				{	
+						editor.txt.html("");
+				}	
+			},
+			publish_btn:function(){
+				var that = this;/* 
+				title_rule = /^ +$/; */
+				this.content = editor.txt.html();
+				if(!this.title)
+				{
+					alert("请先输入标题!");
+				}
+				// else if(!this.choose_modular_radio)
+				// {
+				// 	alert("请先选择版块!")
+				// }
+				else if(!this.content)
+				{
+					alert("请先输入内容!")
+				}
+				else{
+					if(confirm("确认发布?"))
+					{
+						console.log(this.content)
+						axios.post("http://8.129.27.254:8000/publish",window.Qs.stringify({
+							forum_id : that.choose_modular_radio,
+							new_title : that.title,
+							new_content : that.content.toString(),
+						}),
+						{
+							headers:{
+								"Authorization" : "Bearer "+that.token
+							}
+						}
+						).then(function(response){
+							console.log(response.data);
+							if(response.data=="success")
+							{
+								alert("发布新闻成功!");
+						        editor.txt.html("");
+							}
+						}).catch(function(error){
+							console.log("发布新闻失败,请联系管理员!");
+						})
+					}
+				}
+			},
+		}
+	})
+</script>

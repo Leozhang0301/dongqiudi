@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.example.client.MainActivity;
 import com.example.client.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -70,9 +71,7 @@ public class YingChaoRankFragment extends Fragment {
     }
 
     private void GetData(){
-        OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .connectTimeout(8000, TimeUnit.MILLISECONDS)
-                .build();
+        OkHttpClient okHttpClient= MainActivity.okHttpClient;
         Request request=new Request.Builder()
                 .get()
                 .url(URL)

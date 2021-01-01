@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">client</string>
+    <string name="title_news">头条</string>
+    <string name="title_matches">比赛</string>
+    <string name="title_follows">关注</string>
+    <string name="title_predict">预测</string>
+    <string name="title_ranks">数据</string>
+    <string name="yingchao_rank">英超</string>
+    <string name="yijia_rank">意甲</string>
+    <string name="xijia_rank">西甲</string>
+    <string name="dejia_rank">德甲</string>
+    <string name="zhongchao_rank">中超</string>
+    <string name="qiudui">球队</string>
+    <string name="changci">赛</string>
+    <string name="sheng">胜</string>
+    <string name="ping">平</string>
+    <string name="fu">负</string>
+    <string name="jinqiu">进</string>
+    <string name="shiqiu">失</string>
+    <string name="jifen">积分</string>
+    <string name="login">去登陆</string>
+</resources>

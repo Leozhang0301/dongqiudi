@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_news">
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.example.client.ui.news.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/navigation_matches"
+        android:name="com.example.client.ui.matches.MatchesFragment"
+        android:label="@string/title_matches"
+        tools:layout="@layout/fragment_matches" />
+
+    <fragment
+        android:id="@+id/navigation_follows"
+        android:name="com.example.client.ui.follows.FollowFragment"
+        android:label="@string/title_follows"
+        tools:layout="@layout/fragment_follow" />
+
+    <fragment
+        android:id="@+id/navigation_predict"
+        android:name="com.example.client.ui.predict.PredictFragment"
+        android:label="@string/title_predict"
+        tools:layout="@layout/fragment_predict"/>
+
+    <fragment
+        android:id="@+id/navigation_ranking"
+        android:name="com.example.client.ui.ranking.RankingFragment"
+        android:label="@string/title_ranks"
+        tools:layout="@layout/fragment_ranking"/>
+
+
+
+
+</navigation>

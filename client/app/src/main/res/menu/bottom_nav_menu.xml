@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/ic_news_black_24dp"
+        android:title="@string/title_news" />
+
+    <item
+        android:id="@+id/navigation_matches"
+        android:icon="@drawable/ic_matches_black_24dp"
+        android:title="@string/title_matches" />
+
+    <item
+        android:id="@+id/navigation_follows"
+        android:icon="@drawable/ic_follows_black_24dp"
+        android:title="@string/title_follows" />
+
+    <item
+        android:id="@+id/navigation_predict"
+        android:icon="@drawable/ic_predict_black_24dp"
+        android:title="@string/title_predict"/>
+
+    <item
+        android:id="@+id/navigation_ranking"
+        android:icon="@drawable/ic_ranking_black_24dp"
+        android:title="@string/title_ranks"/>
+
+</menu>

@@ -1,0 +1,5 @@
+cd MyProject/
+source ./venv/bin/activate //进入环境
+gunicorn -c gunicorn.py query:app //挂起
+pkill gunicorn //关闭  更新接口之后上传文件重启
+python query.py
