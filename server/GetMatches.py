@@ -57,7 +57,7 @@ for match in matches:
             print(match_dic)
             # 插入数据
             sql = "INSERT INTO `matches`(`DATE`, `TIME`, `HOME_TEAM`, `AWAY_TEAM`, `RESULT`, `LEAGUE`) VALUES (\'%s\'," \
-                  "'%s\','%s\','%s\','%s\','%s\') " % (
+                  "\'%s\',\'%s\',\'%s\',\'%s\',\'%s\') " % (
                       match_dic['date'], match_dic['time'], match_dic['home_team'], match_dic['away_team'],
                       match_dic['result'],
                       match_dic['league'],)
