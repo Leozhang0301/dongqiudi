@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,9 +39,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class XiJiaRankFragment extends Fragment {
+    private TextView leagueRule;
     private ImageView team_icon;
     private String URL="http://8.129.27.254:8000/queryrank?tablename=xijia";
-    private OkHttpClient client=new OkHttpClient();
 
     private Handler handler=new Handler(){
         @Override
@@ -60,14 +61,37 @@ public class XiJiaRankFragment extends Fragment {
         View root=inflater.inflate(R.layout.rank_list,container,false);
         listView=root.findViewById(R.id.rank_team);
         team_icon=root.findViewById(R.id.team_icon);
+        leagueRule=root.findViewById(R.id.league_rules);
         rankItemList=new LinkedList<>();
         GetData();
-
+        setRule();
         //加入数据
         //rankItemList.add(new RankItem("1","河南建业","0","0","0", "0","0","0","0"));
 
 
         return root;
+    }
+
+    //设置联赛规则
+    private void setRule() {
+        String rule="2020-2021西甲联赛名次决定方法：\n"+
+                "西班牙甲级联赛共由20支参赛球队组成，主客场双循环赛制制作赛，每场赛事"+
+                "胜者得3分，平局两队各得1分，负者不得分，38轮过后以积分多少决定最终排名。"+
+                "若同分则依次以下列方式决定排名:\n"+
+                "a) 相互对阵积分多者，名次列前；\n"+
+                "b) 相互对阵净胜球多者，名次列前；\n"+
+                "c) 净胜球，名次列前；\n"+
+                "d）进球多者，名次列前；\n"+
+                "e）公平竞赛积分多者，名次列前\n"+
+                "\n"+
+                "欧战&升降级名额：\n"+
+                "（一）联赛前4名直接参加下赛季欧冠联赛;\n"+
+                "（二）第5名参加下赛季欧联杯，第6名参加下赛季欧洲协会联赛附加赛;\n"+
+                "（三）西班牙国王杯冠军可参加欧联杯，如其已获得欧战资格，则名额让给联赛未获得欧战资格中排名靠前的球队\n"+
+                "（四）若欧冠，欧联冠军都是西甲球队，且两支球队都未通过联赛获得欧冠资格，则第4名参加欧联杯\n"+
+                "（五）排名最后3名的球队降入西乙联赛";
+        leagueRule.setText(rule);
+
     }
 
     private void GetData(){

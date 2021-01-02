@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.client.MainActivity;
 import com.example.client.R;
-import com.example.client.ui.ranking.RankItemAdapter;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

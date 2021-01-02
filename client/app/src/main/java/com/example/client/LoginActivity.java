@@ -74,12 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("kwwl", "response content:" + respon);
                         if (respon.equals("用户不存在") ) {
                             showNormalDialog(2);
-                            Intent intent=new Intent();
-                            intent.setClass(LoginActivity.this,RegisterActivity.class);
-                            startActivity(intent);
+
                         } else if (respon.equals("密码错误")) {
                             showNormalDialog(1);
-                            password.setText("");
+
                         } else if (respon.equals("密码正确")) {
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
@@ -115,6 +113,13 @@ public class LoginActivity extends AppCompatActivity {
             EditText password=(EditText)findViewById(R.id.pw);
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (code==1){
+                    password.setText("");
+                }else if (code==2){
+                    Intent intent=new Intent();
+                    intent.setClass(LoginActivity.this,RegisterActivity.class);
+                    startActivity(intent);
+                }
                 dialog.dismiss();
             }
         });

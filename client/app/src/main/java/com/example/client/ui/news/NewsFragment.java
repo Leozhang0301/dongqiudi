@@ -69,8 +69,8 @@ public class NewsFragment extends Fragment {
     }
 
     private void setData(){
-        newsItems.add(new NewsItem("英超战报：利物浦1-1西布朗，马内破门，马蒂普伤退","12-28 02:20",R.drawable.first,"https://www.dongqiudi.com/news/1758080.html"));
-        newsItems.add(new NewsItem("梅西：冬窗不会与其他球队谈判；巴萨就是我的生命","12-28 05:11",R.drawable.second,"https://www.dongqiudi.com/news/1758176.html"));
+        newsItems.add(new NewsItem("英超战报：利物浦1-1西布朗，马内破门，马蒂普伤退","12-28 02:20",R.drawable.first,"http://8.129.27.254/news/1234.html"));
+        newsItems.add(new NewsItem("梅西：冬窗不会与其他球队谈判；巴萨就是我的生命","12-28 05:11",R.drawable.second,"http://8.129.27.254/news/hello.html"));
         newsItems.add(new NewsItem("C罗：希望有一天我进球时，全世界的孩子们都会欢呼","12-28 02:31",R.drawable.third,"https://www.dongqiudi.com/news/1758096.html"));
         newsItems.add(new NewsItem("意媒：马尔库特不在那不勒斯的计划中，1月可能被清洗","12-28 10:29",R.drawable.forth,"https://www.dongqiudi.com/news/1758371.html"));
         newsItems.add(new NewsItem("挂帅武汉卓尔！李霄鹏：这是一种缘分”","12-28 00:13",R.drawable.fifth,"https://www.dongqiudi.com/news/1758017.html"));

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.client.MainActivity;
 import com.example.client.R;
 import com.example.client.ui.follows.FollowViewModel;
 
@@ -59,9 +60,7 @@ public class MatchesFragment extends Fragment {
     }
 
     private void GetData() {
-        OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .connectTimeout(8000, TimeUnit.MILLISECONDS)
-                .build();
+        OkHttpClient okHttpClient= MainActivity.okHttpClient;
         Request request=new Request.Builder()
                 .get()
                 .url(URL)

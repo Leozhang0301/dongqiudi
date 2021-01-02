@@ -1,10 +1,13 @@
 package com.example.client;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+
     private Button regiBtn;
     private Button resetBtn;
     private EditText accont;
@@ -40,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register);
+
         regiBtn=(Button)findViewById(R.id.ready);
         resetBtn=(Button)findViewById(R.id.reset);
         accont=(EditText)findViewById(R.id.user);
@@ -55,8 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 nameText=name.getText().toString();
                 if(!repwdText.equals(pwdText)){
                     showNomalDialog(1);
-                    repwd.setText("");
-                    name.setText("");
+
                 }else {
                     URL="http://8.129.27.254:8000/register?accont="+accontText+"&pwd="+pwdText+"&name="+nameText;
                     Log.d("kwwl", "URL:" + URL);
@@ -80,18 +84,12 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d("kwwl", "response content:" + respon);
                             if (respon.equals("账户已存在") ) {
                                 showNomalDialog(2);
-                                accont.setText("");
-                                pwd.setText("");
-                                repwd.setText("");
-                                name.setText("");
+
                             } else if (respon.equals("用户名已使用")) {
                                 showNomalDialog(4);
-                                name.setText("");
+
                             } else if (respon.equals("成功")) {
                                 showNomalDialog(3);
-                                Intent intent=new Intent();
-                                intent.setClass(RegisterActivity.this,MainActivity.class);
-                                startActivity(intent);
                             }
                         }
                     });
@@ -130,6 +128,21 @@ public class RegisterActivity extends AppCompatActivity {
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (code==1){
+                    repwd.setText("");
+                    name.setText("");
+                }else if (code==2){
+                    accont.setText("");
+                    pwd.setText("");
+                    repwd.setText("");
+                    name.setText("");
+                }else if (code==3){
+                    Intent intent=new Intent();
+                    intent.setClass(RegisterActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }else if (code==4){
+                    name.setText("");
+                }
                 dialog.dismiss();
             }
         });

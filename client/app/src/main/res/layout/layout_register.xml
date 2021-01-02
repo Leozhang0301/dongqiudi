@@ -9,23 +9,25 @@
         android:id="@+id/top"
         xmlns:android="http://schemas.android.com/apk/res/android" >
         <TableRow>
-            <TextView android:text="user name:"/>
-            <EditText android:hint="please input user name"
+            <TextView android:text="用户名:"/>
+            <EditText android:hint="请输入用户名"
                 android:id="@+id/user"/>
         </TableRow>
         <TableRow>
-            <TextView android:text="password:"/>
-            <EditText android:hint="please input password"
-                android:id="@+id/pw"/>
+            <TextView android:text="密码:"/>
+            <EditText android:hint="请输入密码"
+                android:id="@+id/pw"
+                android:inputType="textPassword"/>
         </TableRow>
         <TableRow>
-            <TextView android:text="check:"/>
-            <EditText android:hint="please check your password"
-                android:id="@+id/check"/>
+            <TextView android:text="确认:"/>
+            <EditText android:hint="请再次输入密码"
+                android:id="@+id/check"
+                android:inputType="textPassword"/>
         </TableRow>
         <TableRow>
-            <TextView android:text="nick name:"/>
-            <EditText android:hint="please check your nick name"
+            <TextView android:text="昵称:"/>
+            <EditText android:hint="别人将看到你的名字"
                 android:id="@+id/name"/>
         </TableRow>
 
@@ -39,13 +41,17 @@
         >
         <TableRow>
             <TextView />
-            <Button android:text="ready"
+            <Button android:text="注册"
                 android:id="@+id/ready"
-                android:layout_marginRight="20dp"/>
-            <Button android:text="reset"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/login_button"
+                android:textColor="@color/purple_500"/>
+            <Button android:text="重置"
                 android:id="@+id/reset"
                 android:onClick="resetClick"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/login_button"
+                android:textColor="@color/purple_500"/>
             <TextView />
         </TableRow>
     </TableLayout>

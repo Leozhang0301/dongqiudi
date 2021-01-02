@@ -10,14 +10,15 @@
         android:id="@+id/top"
         xmlns:android="http://schemas.android.com/apk/res/android" >
         <TableRow>
-            <TextView android:text="user name:"/>
-            <EditText android:hint="please input user name"
+            <TextView android:text="用户名:"/>
+            <EditText android:hint="请输入用户名"
                 android:id="@+id/user"/>
         </TableRow>
         <TableRow>
-            <TextView android:text="password:"/>
-            <EditText android:hint="please input password"
-                android:id="@+id/pw"/>
+            <TextView android:text="密码:"/>
+            <EditText android:hint="请输入密码"
+                android:id="@+id/pw"
+                android:inputType="textPassword"/>
         </TableRow>
 
 
@@ -30,12 +31,16 @@
         >
         <TableRow>
             <TextView />
-            <Button android:text="log in"
+            <Button android:text="登录"
                 android:id="@+id/login"
-                android:layout_marginRight="20dp"/>
-            <Button android:text="regist"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/login_button"
+                android:textColor="@color/purple_500"/>
+            <Button android:text="注册"
                 android:id="@+id/regist"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/login_button"
+                android:textColor="@color/purple_500"/>
             <TextView />
         </TableRow>
     </TableLayout>
