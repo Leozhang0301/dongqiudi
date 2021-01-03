@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/ZhongChaoRankFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/ZhongChaoRankFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/match_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/match_list_item.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GetMatches.py" beforeDir="false" afterPath="$PROJECT_DIR$/GetMatches.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +41,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GetNewestData">
+  <component name="RunManager" selected="Python.query">
     <configuration name="GetMatches" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,9 +128,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.GetNewestData" />
         <item itemvalue="Python.query" />
         <item itemvalue="Python.GetMatches" />
+        <item itemvalue="Python.GetNewestData" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -160,5 +160,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="item.find(class_='feature')" />
+        <watch expression="match_dic['result']" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

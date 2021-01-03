@@ -23,9 +23,52 @@ from flask_cors import CORS
 # cursor = db.cursor()
 
 app = flask.Flask(__name__)
+# 解决跨域问题
 CORS(app, resources=r'/*')
 
 
+# 获取新闻列表
+# 方法：GET
+# 参数：无
+# 返回：json
+@app.route('/getnews', methods=['get'])
+def getNews():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    sql = "select * from news"
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    results = []
+    for data in datas:
+        dict = {'标题': data[1], '内容': data[2], '时间': str(data[3])}
+        results.append(dict)
+    print(results)
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
+# 获取比赛列表
+# 方法：GET
+# 参数：无
+# 返回：json
 @app.route('/getmatches', methods=['get'])
 def getMatches():
     # 获取请求
@@ -255,8 +298,6 @@ def queryrank():
 
     cursor = db.cursor()
 
-    # app = flask.Flask(__name__)
-
     table_name = request.values.get('tablename')
     sql = ""
 
@@ -291,10 +332,10 @@ def queryrank():
                       '进球': data[6], '失球': data[7],
                       '净胜球': data[8], '积分': data[9]}
             results.append(result)
-            # 关闭数据库连接
-            cursor.close()
-            db.close()
-            server.close()
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
         return json.dumps(results, ensure_ascii=False)
 
 

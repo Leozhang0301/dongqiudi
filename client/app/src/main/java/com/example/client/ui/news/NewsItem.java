@@ -15,6 +15,12 @@ public class NewsItem {
         this.url = url;
     }
 
+    public NewsItem(String title, String publishTime, String url) {
+        this.title = title;
+        this.publishTime = publishTime;
+        this.url = url;
+    }
+
     public NewsItem(String title, String publishTime, int coverID) {
         this.title = title;
         this.publishTime = publishTime;

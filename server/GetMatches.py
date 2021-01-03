@@ -53,7 +53,11 @@ for match in matches:
             match_dic['league'] = item.find(class_='round').text
             match_dic['home_team'] = item.find(class_='teama-name').text
             match_dic['away_team'] = item.find(class_='teamb-name').text
-            match_dic['result'] = item.find(class_='feature').text
+            print(item.find(class_='feature'))
+            if item.find(class_='feature') is None:
+                match_dic['result']=item.find(class_='score').text
+            else:
+                match_dic['result'] = item.find(class_='feature').text
             print(match_dic)
             # 插入数据
             sql = "INSERT INTO `matches`(`DATE`, `TIME`, `HOME_TEAM`, `AWAY_TEAM`, `RESULT`, `LEAGUE`) VALUES (\'%s\'," \
@@ -61,8 +65,8 @@ for match in matches:
                       match_dic['date'], match_dic['time'], match_dic['home_team'], match_dic['away_team'],
                       match_dic['result'],
                       match_dic['league'],)
-            cursor.execute(sql)
             print(sql)
+            cursor.execute(sql)
 db.commit()
 print('matches insert successful')
 
