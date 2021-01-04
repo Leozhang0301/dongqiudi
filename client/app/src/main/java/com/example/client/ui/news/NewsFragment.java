@@ -71,6 +71,7 @@ public class NewsFragment extends Fragment {
                 //新建一个newitem对象来获取点击的对象
                 NewsItem item=(NewsItem) newsItems.get(position);
                 bundle.putString("url",item.getUrl());
+                bundle.putString("title",item.getTitle());
                 intent.putExtras(bundle);
                 intent.setClass(getActivity(),NewsActivity.class);
                 startActivity(intent);

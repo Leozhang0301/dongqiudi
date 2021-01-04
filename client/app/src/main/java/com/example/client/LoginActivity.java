@@ -1,8 +1,10 @@
 package com.example.client;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,7 +80,13 @@ public class LoginActivity extends AppCompatActivity {
                         } else if (respon.equals("密码错误")) {
                             showNormalDialog(1);
 
-                        } else if (respon.equals("密码正确")) {
+                        } else{
+                            //用户信息存到sharedprefences
+                            SharedPreferences sp=getSharedPreferences("user-info", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sp.edit();
+                            editor.putString("user_name",respon);
+                            editor.commit();
+
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

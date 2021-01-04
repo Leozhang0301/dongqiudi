@@ -1,5 +1,7 @@
 package com.example.client;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.LruCache;
@@ -19,6 +21,7 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends AppCompatActivity {
     public static OkHttpClient okHttpClient;
     public static LruCache<String, BitmapDrawable> mImageCache;
+    public static SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //sharedpreferences全局变量
+        sharedPreferences=getSharedPreferences("user-info", Context.MODE_PRIVATE);
 
         //Lrucache全局变量
         //设置缓存大小为最大缓存的1/8

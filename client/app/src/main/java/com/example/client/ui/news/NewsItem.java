@@ -6,6 +6,7 @@ public class NewsItem {
     private String title;
     private String publishTime;
     private int coverID;
+    private String coverURL;
     private String url;
 
     public NewsItem(String title, String publishTime, int coverID, String url) {
@@ -20,6 +21,7 @@ public class NewsItem {
         this.publishTime = publishTime;
         this.url = url;
     }
+    
 
     public NewsItem(String title, String publishTime, int coverID) {
         this.title = title;

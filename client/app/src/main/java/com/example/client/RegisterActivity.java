@@ -90,6 +90,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                             } else if (respon.equals("成功")) {
                                 showNomalDialog(3);
+                                SharedPreferences sp=getSharedPreferences("user-info",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=sp.edit();
+                                editor.putString("user_name",nameText);
+                                editor.commit();
                             }
                         }
                     });

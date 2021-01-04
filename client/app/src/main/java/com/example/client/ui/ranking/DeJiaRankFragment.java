@@ -1,5 +1,6 @@
 package com.example.client.ui.ranking;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -21,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.example.client.MainActivity;
 import com.example.client.R;
+import com.example.client.TeamNewsActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -65,12 +68,29 @@ public class DeJiaRankFragment extends Fragment {
         rankItemList=new LinkedList<>();
         GetData();
         setRule();
+        setListOnClickListener();
 
         //加入数据
         //rankItemList.add(new RankItem("1","河南建业","0","0","0", "0","0","0","0"));
 
 
         return root;
+    }
+
+    private void setListOnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent();
+                Bundle bundle=new Bundle();
+                bundle.putInt("position",position);
+                RankItem item=(RankItem)rankItemList.get(position);
+                bundle.putString("team",item.getQiudui());
+                intent.putExtras(bundle);
+                intent.setClass(getActivity(), TeamNewsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //设置联赛规则

@@ -23,6 +23,8 @@
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".ui.news.NewsActivity"></activity>
+        <activity android:name=".UserManagerActivity"></activity>
+        <activity android:name=".TeamNewsActivity"></activity>
     </application>
 
 </manifest>

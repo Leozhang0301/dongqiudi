@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout android:id="@+id/linear_layout_webview"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
-    <WebView
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout android:id="@+id/linear_layout_webview"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/news_webview"/>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/news_content_title"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/news_webview"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/new_content_comment"
+            android:hint="@string/comment"/>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
+
 
 

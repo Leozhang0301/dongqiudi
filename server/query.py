@@ -65,6 +65,7 @@ def getNews():
     server.close()
     return json.dumps(results, ensure_ascii=False)
 
+
 # 获取比赛列表
 # 方法：GET
 # 参数：无
@@ -263,7 +264,12 @@ def checkuser():
         if realPwd != password:
             return '密码错误'
         elif realPwd == password:
-            return '密码正确'
+            sql = "select NAME from user where ACCONT=\'%s\'" % userName
+            cursor.execute(sql)
+            userNick = cursor.fetchall()
+            userNick = userNick[0][0]
+            print(userNick)
+            return userNick
         else:
             return '123'
 
