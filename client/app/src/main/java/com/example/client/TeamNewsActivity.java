@@ -71,7 +71,6 @@ public class TeamNewsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //team.setText(bundle.getString("team"));
     }
 
     private void setdata() {

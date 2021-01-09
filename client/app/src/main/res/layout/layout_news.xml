@@ -22,6 +22,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/news_webview"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="精选评论"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comments_list"/>
+        <TextView
+            android:id="@+id/empty_comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="@string/nodata"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"

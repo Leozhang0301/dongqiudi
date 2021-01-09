@@ -8,6 +8,15 @@ public class NewsItem {
     private int coverID;
     private String coverURL;
     private String url;
+    private String newsID;
+
+    public NewsItem(String title, String publishTime, String coverURL, String url, String newsID) {
+        this.title = title;
+        this.publishTime = publishTime;
+        this.coverURL = coverURL;
+        this.url = url;
+        this.newsID = newsID;
+    }
 
     public NewsItem(String title, String publishTime, String coverURL, String url) {
         this.title = title;
@@ -21,6 +30,14 @@ public class NewsItem {
         this.publishTime = publishTime;
         this.coverID = coverID;
         this.url = url;
+    }
+
+    public String getNewsID() {
+        return newsID;
+    }
+
+    public void setNewsID(String newsID) {
+        this.newsID = newsID;
     }
 
     public String getCoverURL() {

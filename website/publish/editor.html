@@ -42,7 +42,7 @@
 		<div id="main" style="margin-top: 20px;">
 			<el-row style="margin-bottom: 20px;">
 				<el-col>
-					<el-radio v-for="(item,index) in modulars" v-model="choose_modular_radio" :label="item.FORUM_ID" :key="index" >{{item.FORUM_NAME}}</el-radio>
+					<el-radio v-for="(item,index) in modulars" v-model="choose_modular_radio" :label="item.FORUM_ID" :key="index">{{item.FORUM_NAME}}</el-radio>
 				</el-col>
 			</el-row>
 			<el-row>
@@ -52,14 +52,19 @@
 				<el-col :span="9" :offset="1">
 					标题<el-input type="text" v-model="title" style="width: 80%;"></el-input>
 				</el-col>
-				<el-col :span="12">
-					<el-button-group style="float: right;">
+				<el-col :span="9" :offset="1">
+					封面<el-input type="text" v-model="cover" style="width: 80%;"></el-input>
+				</el-col>
+			</el-row>
+			
+			<el-row style="margin-top: 30px;">
+				<el-col :span="24" style="text-align: center;">
+					<el-button-group>
 						<el-button @click="cancel_btn">取消</el-button>
 						<el-button style="margin-left: 20px;" type="primary" @click="publish_btn">发布</el-button>
 					</el-button-group>
 				</el-col>
 			</el-row>
-			
 			<pre id="console"></pre>
 		</div>
 			
@@ -89,7 +94,8 @@
 			modulars:null,
 			choose_modular_radio:null,
 			title:null,
-			content:null
+			content:null,
+			cover:null
 		},
 		created:function(){
 			
@@ -194,6 +200,7 @@
 							forum_id : that.choose_modular_radio,
 							new_title : that.title,
 							new_content : that.content.toString(),
+							cover:that.cover
 						}),
 						{
 							headers:{

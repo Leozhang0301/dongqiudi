@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/CommentAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/comment_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/TeamNewsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/TeamNewsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_news.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/publish/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/publish/editor.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +49,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GetMatches">
+  <component name="RunManager" selected="Python.query">
     <configuration name="GetMatches" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,9 +136,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.query" />
         <item itemvalue="Python.GetMatches" />
         <item itemvalue="Python.GetNewestData" />
-        <item itemvalue="Python.query" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
