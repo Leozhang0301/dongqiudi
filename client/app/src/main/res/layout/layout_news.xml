@@ -13,6 +13,11 @@
             android:id="@+id/news_content_title"
             android:textSize="20dp"
             android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/news_content_time"
+            android:textSize="18dp"/>
         <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

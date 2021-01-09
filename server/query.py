@@ -26,6 +26,49 @@ app = flask.Flask(__name__)
 # 解决跨域问题
 CORS(app, resources=r'/*')
 
+# 通过标签获取新闻列表
+# 方法：GET
+# 参数：tag 标签名
+# 返回：json
+@app.route('/getnewsbytag', methods=['get'])
+def getNewsByTag():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    tag = request.values.get('tag')
+    sql = 'SELECT NEWS_ID FROM `news_tag` WHERE TAG=\'%s\'' % tag
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    results = []
+    for data in datas:
+        sql = 'SELECT * FROM `news` WHERE NEWS_ID=\'%s\'' % data[0]
+        cursor.execute(sql)
+        newsGeted = cursor.fetchall()
+        dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4]}
+        results.append(dict)
+    print(results)
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
 
 # 获取新闻列表
 # 方法：GET
@@ -56,7 +99,7 @@ def getNews():
     datas = cursor.fetchall()
     results = []
     for data in datas:
-        dict = {'标题': data[1], '内容': data[2], '时间': str(data[3])}
+        dict = {'标题': data[1], '内容': data[2], '时间': str(data[3]), '封面': data[4]}
         results.append(dict)
     print(results)
     # 关闭数据库连接
@@ -117,12 +160,8 @@ def publish():
     print(request.form)
     print(request.form['new_content'])
     print(type(request.form['new_content']))
-    # string = "<p>hello</p>"
-    # new_title='hello'
     file = open('/www/wwwroot/8.129.27.254/news/' + request.form['new_title'] + '.html', 'w', encoding='utf-8')
-    # file = open('%s.html' % new_title, 'w', encoding='utf-8')
     file.write(request.form['new_content'])
-    # file.write(string)
     print(file)
     file.close()
 

@@ -72,6 +72,7 @@ public class NewsFragment extends Fragment {
                 NewsItem item=(NewsItem) newsItems.get(position);
                 bundle.putString("url",item.getUrl());
                 bundle.putString("title",item.getTitle());
+                bundle.putString("time",item.getPublishTime());
                 intent.putExtras(bundle);
                 intent.setClass(getActivity(),NewsActivity.class);
                 startActivity(intent);
@@ -109,7 +110,8 @@ public class NewsFragment extends Fragment {
                                 String title=jsonObject.getString("标题");
                                 String publishTime=jsonObject.getString("时间");
                                 String contentURL="http://8.129.27.254/news/"+title+".html" ;
-                                newsItems.add(new NewsItem(title,publishTime,R.drawable.second,contentURL));
+                                String coverURL=jsonObject.getString("封面");
+                                newsItems.add(new NewsItem(title,publishTime,coverURL,contentURL));
                             }
                             itemAdapter=new NewsItemAdapter((LinkedList<NewsItem>)newsItems,getActivity());
                             newslist.setAdapter(itemAdapter);
