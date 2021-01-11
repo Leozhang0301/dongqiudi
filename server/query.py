@@ -26,7 +26,51 @@ app = flask.Flask(__name__)
 # 解决跨域问题
 CORS(app, resources=r'/*')
 
+# 提交评论
+# 方法：GET
+# 参数：newsID 新闻id
+#       userID 用户id
+#       content 内容
+# 返回：成功
+@app.route('/submitcomment', methods=['get'])
+def submit():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
 
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    newsID = request.values.get('newsid')
+    userName = request.values.get('username')
+    content = request.values.get('content')
+    sql = 'INSERT INTO `comment`(`NEWS_ID`, `USER_NAME`, `CONTENT`, `TIME`) VALUES (\'%s\',\'%s\',\'%s\',now())' % (
+        newsID, userName, content)
+    print(sql)
+    cursor.execute(sql)
+    db.commit()
+
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
+
+# 通过新闻获得评论
+# 方法：GET
+# 参数：ID 新闻id
+# 返回：json
 @app.route('/getcomments', methods=['get'])
 def getComments():
     # 获取请求
@@ -49,17 +93,17 @@ def getComments():
     cursor = db.cursor()
 
     newsID = request.values.get('news')
-    sql = 'SELECT * FROM `comment` WHERE NEW_ID=\'%s\'' % newsID
+    sql = 'SELECT * FROM `comment` WHERE NEWS_ID=\'%s\'' % newsID
     cursor.execute(sql)
     datas = cursor.fetchall()
     results = []
     for data in datas:
-        userID = data[2]
-        sql = 'SELECT NAME FROM `user` WHERE USER_ID=\'%s\'' % userID
-        cursor.execute(sql)
-        userName = cursor.fetchall()
-        userName = userName[0][0]
-        dict = {'姓名': userName, '内容': data[3], '时间': str(data[4])}
+        # userID = data[2]
+        # sql = 'SELECT NAME FROM `user` WHERE USER_ID=\'%s\'' % userID
+        # cursor.execute(sql)
+        # userName = cursor.fetchall()
+        # userName = userName[0][0]
+        dict = {'姓名': data[2], '内容': data[3], '时间': str(data[4])}
         results.append(dict)
     print(results)
 
