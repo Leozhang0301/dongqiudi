@@ -69,11 +69,6 @@ public class DeJiaRankFragment extends Fragment {
         GetData();
         setRule();
         setListOnClickListener();
-
-        //加入数据
-        //rankItemList.add(new RankItem("1","河南建业","0","0","0", "0","0","0","0"));
-
-
         return root;
     }
 

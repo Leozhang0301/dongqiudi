@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.client.FollowPickActivity;
 import com.example.client.LoginActivity;
 import com.example.client.R;
 import com.example.client.UserManagerActivity;
@@ -27,6 +28,7 @@ public class FollowFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private TextView userNickName;
     private ImageButton imageButton;
+    private Button followBtn;
 
     @Nullable
     @Override
@@ -60,6 +62,16 @@ public class FollowFragment extends Fragment {
                     Intent intent=new Intent();
                     intent.setClass(getActivity(), UserManagerActivity.class);
                     startActivity(intent);
+                }
+            });
+            followBtn=(Button)root.findViewById(R.id.follow_btn);
+            followBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent();
+                    intent.setClass(getActivity(), FollowPickActivity.class);
+                    startActivity(intent);
+
                 }
             });
         }

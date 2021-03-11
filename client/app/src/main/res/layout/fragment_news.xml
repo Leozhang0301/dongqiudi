@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/linear_layout_banner"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:id="@+id/image_banner"
-            android:scaleType="center"/>
+            android:scaleType="center"
+            app:tipTextSize="12dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/tv"/>
+        </com.stx.xhb.androidx.XBanner>
 
         <ListView
             android:id="@+id/news_list"

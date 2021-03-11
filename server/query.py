@@ -26,6 +26,57 @@ app = flask.Flask(__name__)
 # 解决跨域问题
 CORS(app, resources=r'/*')
 
+
+@app.route('/checkmanageruser', methods=['get'])
+def check():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    userName = request.values.get('username')
+    password = request.values.get('pwd')
+    sql = "select PASSWORD from user where ACCONT =\'%s\'" % userName
+    cursor.execute(sql)
+    realPwd = cursor.fetchall()
+    print(realPwd)
+    if realPwd == ():
+        return '用户不存在'
+    else:
+        realPwd = realPwd[0][0]
+        print(realPwd)
+        if realPwd != password:
+            return '密码错误'
+        elif realPwd == password:
+            sql = "select ROOT from user where ACCONT=\'%s\'" % userName
+            cursor.execute(sql)
+            root = cursor.fetchall()
+            root = str(root[0][0])
+            print(root)
+            return root
+        else:
+            return '123'
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+
+
 # 提交评论
 # 方法：GET
 # 参数：newsID 新闻id
@@ -66,6 +117,7 @@ def submit():
     db.close()
     server.close()
     return '成功'
+
 
 # 通过新闻获得评论
 # 方法：GET
@@ -405,6 +457,72 @@ def checkuser():
     cursor.close()
     db.close()
     server.close()
+
+
+# 查询队名供关注使用
+# 方法：GET
+# 参数：tablename:表名
+# 返回: json
+@app.route('/queryteamname')
+def queryteamname():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    table_name = request.values.get('tablename')
+    sql = ""
+
+    if table_name:
+        if table_name == 'yingchao':
+            sql = 'select name from team,yingchao_ranking where team.TEAM_ID=yingchao_ranking.TEAM_ID'
+
+        elif table_name == 'yijia':
+            sql = 'select name from team,yijia_ranking where team.TEAM_ID=yijia_ranking.TEAM_ID'
+
+        elif table_name == 'xijia':
+            sql = 'select name from team,xijia_ranking where team.TEAM_ID=xijia_ranking.TEAM_ID'
+
+        elif table_name == 'dejia':
+            sql = 'select name from team,dejia_ranking where team.TEAM_ID=dejia_ranking.TEAM_ID'
+
+        elif table_name == 'zhongchao':
+            sql = 'select name from team,zhongchao_ranking where team.TEAM_ID=zhongchao_ranking.TEAM_ID'
+
+        cursor.execute(sql)
+        datas = cursor.fetchall()
+        results = []
+        for data in datas:
+            result = {'队名': data[0]}
+            results.append(result)
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
+        return json.dumps(results, ensure_ascii=False)
+
+
+    else:
+        resu = {'code': 1001, 'message': '参数不能为空'}
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
+        return json.dumps(resu, ensure_ascii=False)
 
 
 # 查询排行榜

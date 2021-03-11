@@ -118,7 +118,7 @@ public class RankItemAdapter extends BaseAdapter {
         TextView jifen;
     }
 
-    class ImageTask extends AsyncTask<String,Void,BitmapDrawable>{
+     class ImageTask extends AsyncTask<String,Void,BitmapDrawable>{
         private String iconURL;
 
         @Override
