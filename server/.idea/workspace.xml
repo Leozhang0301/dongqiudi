@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/FollowPickActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/DeJiaFollowFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragmentAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowTeamAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/TeamFollowItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/TeamGridView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/XiJiaFollowFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/YiJiaFollowFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/YingChaoFollowFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/ZhongChaoFollowFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_follow_pick.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_user_manager_options.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/teams_grid.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/teams_grid_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/UserManagerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/UserManagerActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/DeJiaRankFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/ranking/RankItemAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_news.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_user_manager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/layout_user_manager.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../website/publish/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/../website/publish/editor.html" afterDir="false" />
-    </list>
+    <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

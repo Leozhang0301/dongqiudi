@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="css/el-index.css" />
+
+		<script src="js/vue.js"></script>
+		<script src="js/axios.min.js"></script>
+		<script src="js/qs.min.js"></script>
+		<script src="js/el-index.js"></script>
+		<script src="js/vue-cookies.js"></script>
+		<title></title>
+		<style>
+			.w-e-text-container{
+			    height: 550px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
+			}
+			.progress{
+				margin: auto;
+			}
+			.el-main {
+			    background-color: #E9EEF3;
+			    color: #333;
+			    text-align: center;
+			    line-height: 160px;
+			  }
+			  .el-aside {
+			      background-color: #D3DCE6;
+			      color: #333;
+			      text-align: center;
+			      line-height: 200px;
+			    }
+		</style>
+	</head>
+	<body>
+		<div id="main" style="width: 100%;">
+			<el-container>
+			  <el-aside width="200px">Aside</el-aside>
+			  <el-main>Main</el-main>
+			</el-container>
+		</div>
+	</body>
+	
+</html>
+<script>
+  new Vue({
+	  el:"#main",
+	  data:{
+		  
+	  }
+  })
+</script>
