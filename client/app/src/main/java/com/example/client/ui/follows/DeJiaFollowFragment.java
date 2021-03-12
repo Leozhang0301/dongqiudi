@@ -1,7 +1,10 @@
 package com.example.client.ui.follows;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.client.FollowPickActivity;
@@ -69,7 +73,89 @@ public class DeJiaFollowFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),"click"+mData.get(position).getTeamName(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"click"+mData.get(position).getTeamName(),Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sp=getActivity().getSharedPreferences("user-info",Context.MODE_PRIVATE);
+                String username=sp.getString("user_name","none");
+
+                OkHttpClient okHttpClient=MainActivity.okHttpClient;
+                String addFollowURL="http://8.129.27.254:8000/addfollow?username="+username+"&teamname="+mData.get(position).getTeamName();
+                Request request=new Request.Builder()
+                        .get()
+                        .url(addFollowURL)
+                        .build();
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("kwwl","onFailure"+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        Log.d("kwwl","onResponse"+response.code());
+                        String respon=response.body().string();
+                        if (respon.equals("已关注")){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder dialog=new AlertDialog.Builder(getContext());
+                                    dialog.setMessage("您已经关注了该球队，是否需要取消关注");
+                                    dialog.setTitle("警告");
+                                    dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            String disfollowURL="http://8.129.27.254:8000/disfollow?username="+username+"&teamname="+mData.get(position).getTeamName();
+                                            Request request1=new Request.Builder()
+                                                    .get()
+                                                    .url(disfollowURL)
+                                                    .build();
+                                            okHttpClient.newCall(request1).enqueue(new Callback() {
+                                                @Override
+                                                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                                    Log.d("kwwl","onFailure"+e.toString());
+                                                }
+
+                                                @Override
+                                                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                                    getActivity().runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(getContext(),"取消成功",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    dialog.show();
+                                }
+                            });
+
+                        }else if (respon.equals("成功")){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder dialog=new AlertDialog.Builder(getContext());
+                                    dialog.setMessage("关注成功");
+                                    dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    dialog.show();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }

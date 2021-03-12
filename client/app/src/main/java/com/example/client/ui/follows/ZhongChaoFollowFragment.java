@@ -1,5 +1,7 @@
 package com.example.client.ui.follows;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +59,45 @@ public class ZhongChaoFollowFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),"click"+mData.get(position).getTeamName(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"click"+mData.get(position).getTeamName(),Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sp=getActivity().getSharedPreferences("user-info", Context.MODE_PRIVATE);
+                String username=sp.getString("user_name","none");
+
+                OkHttpClient okHttpClient=MainActivity.okHttpClient;
+                String addFollowURL="http://8.129.27.254:8000/addfollow?username="+username+"&teamname="+mData.get(position).getTeamName();
+                Request request=new Request.Builder()
+                        .get()
+                        .url(addFollowURL)
+                        .build();
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("kwwl","onFailure"+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        Log.d("kwwl","onResponse"+response.code());
+                        String respon=response.body().string();
+                        if (respon.equals("已关注")){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"已关注",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }else if (respon.equals("成功")){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"关注成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }

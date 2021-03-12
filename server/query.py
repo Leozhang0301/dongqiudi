@@ -27,6 +27,118 @@ app = flask.Flask(__name__)
 CORS(app, resources=r'/*')
 
 
+# 取消关注
+# 方法：GET
+# 参数：username 用户名
+#       teamname 球队名
+# 返回：string '成功'
+@app.route('/disfollow', methods=['get'])
+def disfollow():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    username = request.values.get('username')
+    teamname = request.values.get('teamname')
+    # 用username和teamname查询id
+    sql = 'select USER_ID from user where name=\'%s\'' % username
+    cursor.execute(sql)
+    userid = cursor.fetchall()
+
+    sql = 'select TEAM_ID from team where name=\'%s\'' % teamname
+    cursor.execute(sql)
+    teamid = cursor.fetchall()
+    sql = 'delete from follow where team_id=%s and user_id=%s' % (teamid[0][0], userid[0][0])
+    print(sql)
+    cursor.execute(sql)
+    db.commit()
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
+
+
+# 添加关注
+# 方法：GET
+# 参数：username 用户名
+#       teamname 球队名
+# 返回：string '成功'/'已关注'
+@app.route('/addfollow', methods=['get'])
+def addFollow():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    username = request.values.get('username')
+    teamname = request.values.get('teamname')
+    sql = 'select * from user,follow,team where user.USER_ID=follow.USER_ID and team.TEAM_ID=follow.TEAM_ID and ' \
+          'user.NAME=\'%s\' and team.NAME=\'%s\'' % (username, teamname)
+    print(sql)
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    # 表中没有则添加
+    if result == ():
+        # 用username和teamname查询id
+        sql = 'select USER_ID from user where name=\'%s\'' % username
+        cursor.execute(sql)
+        userid = cursor.fetchall()
+
+        sql = 'select TEAM_ID from team where name=\'%s\'' % teamname
+        cursor.execute(sql)
+        teamid = cursor.fetchall()
+        sql = 'insert into follow(team_id,user_id) values(%s,%s)' % (teamid[0][0], userid[0][0])
+        cursor.execute(sql)
+        db.commit()
+
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
+        return '成功'
+    # 表中有记录
+    else:
+        # 关闭数据库连接
+        cursor.close()
+        db.close()
+        server.close()
+        return '已关注'
+
+
+# 查看用户权限 用于管理后台
+# 方法：GET
+# 参数：username 用户名
+#       pwd 密码
+# 返回：string '用户不存在'/'密码错误'/权限级别
 @app.route('/checkmanageruser', methods=['get'])
 def check():
     # 获取请求
@@ -159,6 +271,56 @@ def getComments():
         results.append(dict)
     print(results)
 
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
+
+# 通过用户名获得新闻列表
+# 方法：GET
+# 参数：username 用户名
+# 返回：json
+@app.route('/getnewsbyusername', methods=['get'])
+def getnewsbyusername():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    username = request.values.get('username')
+    sql = 'SELECT team.NAME from team,follow,user WHERE team.TEAM_ID=follow.TEAM_ID AND follow.USER_ID=user.USER_ID ' \
+          'AND ' \
+          'user.NAME=\'%s\'' % username
+    cursor.execute(sql)
+    follows = cursor.fetchall()
+    for tag in follows:
+        sql = 'SELECT NEWS_ID FROM `news_tag` WHERE TAG=\'%s\'' % tag
+        cursor.execute(sql)
+        datas = cursor.fetchall()
+        results = []
+        for data in datas:
+            sql = 'SELECT * FROM `news` WHERE NEWS_ID=\'%s\'' % data[0]
+            cursor.execute(sql)
+            newsGeted = cursor.fetchall()
+            dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4],
+                    'ID': newsGeted[0][0]}
+            results.append(dict)
+
+    # 关闭数据库连接
     cursor.close()
     db.close()
     server.close()
@@ -618,4 +780,4 @@ def goodbye():
 if __name__ == '__main__':
     # 上传服务器时要将host改成0.0.0.0
     # 调试的时候host使用127.0.0.1
-    app.run(debug=True, port=8000, host='0.0.0.0')
+    app.run(debug=True, port=8000, host='127.0.0.1')
