@@ -53,6 +53,11 @@
 					封面<el-input type="text" v-model="cover" style="width: 80%;"></el-input>
 				</el-col>
 			</el-row>
+			<el-row>
+				<el-col :span="10" :offset="1">
+					板块<el-input type="text" v-model="object" style="width: 80%;"></el-input>
+				</el-col>
+			</el-row>
 			
 			<el-row style="margin-top: 30px;">
 				<el-col :span="24" style="text-align: center;">
@@ -92,7 +97,8 @@
 			choose_modular_radio:null,
 			title:null,
 			content:null,
-			cover:null
+			cover:null,
+			object:null
 		},
 		created:function(){
 			
@@ -181,13 +187,13 @@
 				{
 					alert("请先输入标题!");
 				}
-				// else if(!this.choose_modular_radio)
-				// {
-				// 	alert("请先选择版块!")
-				// }
 				else if(!this.content)
 				{
 					alert("请先输入内容!")
+				}
+				else if(!this.object)
+				{
+					alert("请选择板块")
 				}
 				else{
 					if(confirm("确认发布?"))
@@ -197,7 +203,8 @@
 							forum_id : that.choose_modular_radio,
 							new_title : that.title,
 							new_content : that.content.toString(),
-							cover:that.cover
+							cover:that.cover,
+							object:that.object
 						}),
 						{
 							headers:{

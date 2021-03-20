@@ -189,6 +189,51 @@ def check():
     server.close()
 
 
+# 举报
+# 方法: GET
+# 参数：newsID 新闻id
+#       userID 用户id
+#       content 内容
+# 返回：成功
+@app.route('/submitreport', methods=['get'])
+def submitReport():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    newsID = request.values.get('newsid')
+    userName = request.values.get('username')
+    content = request.values.get('content')
+    sql = 'select COMMENT_ID from comment where NEWS_ID=\'%s\' and USER_NAME=\'%s\' and CONTENT=\'%s\'' % (
+        newsID, userName, content)
+    cursor.execute(sql)
+    commentID = cursor.fetchall()
+    print(commentID[0][0])
+    sql = 'insert into report(COMMENT_ID) values(%s) ' % commentID[0][0]
+    cursor.execute(sql)
+    db.commit()
+
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
+
+
 # 提交评论
 # 方法：GET
 # 参数：newsID 新闻id
@@ -307,18 +352,25 @@ def getnewsbyusername():
           'user.NAME=\'%s\'' % username
     cursor.execute(sql)
     follows = cursor.fetchall()
+
+    results = []
+    # print(follows)
     for tag in follows:
         sql = 'SELECT NEWS_ID FROM `news_tag` WHERE TAG=\'%s\'' % tag
         cursor.execute(sql)
         datas = cursor.fetchall()
-        results = []
-        for data in datas:
-            sql = 'SELECT * FROM `news` WHERE NEWS_ID=\'%s\'' % data[0]
-            cursor.execute(sql)
-            newsGeted = cursor.fetchall()
-            dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4],
-                    'ID': newsGeted[0][0]}
-            results.append(dict)
+        if datas != ():
+            for data in datas:
+                # print(data[0])
+                sql = 'SELECT * FROM `news` WHERE NEWS_ID=%s' % data[0]
+                # print(sql)
+                cursor.execute(sql)
+                newsGeted = cursor.fetchall()
+                # print(newsGeted)
+                dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4],
+                        'ID': newsGeted[0][0]}
+                results.append(dict)
+        # print(results)
 
     # 关闭数据库连接
     cursor.close()
@@ -489,10 +541,20 @@ def publish():
     news_title = request.form['new_title']
     news_path = news_title + '.html'
     news_cover = request.form['cover']
+    news_object = request.form['object']
     sql = "INSERT INTO `news`(`NEWS_TITLE`, `NEWS_CONTENT`, `PUBLISH_DATA`,`COVER`) VALUES (\'%s\',\'%s\',now(),\'%s\')" % (
         news_title, news_path, news_cover)
     print(sql)
     print(news_path)
+    cursor.execute(sql)
+    db.commit()
+
+    sql = 'select MAX(news_id) from news'
+    cursor.execute(sql)
+    news_id = cursor.fetchall()
+
+    sql = 'INSERT INTO `news_tag` (`TAG_ID`, `NEWS_ID`, `TAG`) VALUES (NULL, \'%s\', \'%s\')' % (news_id[0][0], news_object)
+    print(sql)
     cursor.execute(sql)
     db.commit()
 
@@ -780,4 +842,4 @@ def goodbye():
 if __name__ == '__main__':
     # 上传服务器时要将host改成0.0.0.0
     # 调试的时候host使用127.0.0.1
-    app.run(debug=True, port=8000, host='127.0.0.1')
+    app.run(debug=True, port=8000, host='0.0.0.0')
