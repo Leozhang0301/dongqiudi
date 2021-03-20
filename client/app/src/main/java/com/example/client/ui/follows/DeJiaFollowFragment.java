@@ -59,13 +59,6 @@ public class DeJiaFollowFragment extends Fragment {
         mData=new LinkedList<TeamFollowItem>();
         GetData();
         setClickListener();
-
-//        mData.add(new TeamFollowItem("河南建业","http://8.129.27.254/image/team_icon/河南建业.png"));
-//        mData.add(new TeamFollowItem("河南建业","http://8.129.27.254/image/team_icon/河南建业.png"));
-//        mData.add(new TeamFollowItem("河南建业","http://8.129.27.254/image/team_icon/河南建业.png"));
-//        mData.add(new TeamFollowItem("河南建业","http://8.129.27.254/image/team_icon/河南建业.png"));
-//        followTeamAdapter=new FollowTeamAdapter((LinkedList<TeamFollowItem>)mData,getActivity());
-//        gridView.setAdapter(followTeamAdapter);
         return root;
     }
 

@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -53,6 +57,7 @@ public class NewsActivity extends AppCompatActivity {
     private Button publishBtn;
     private EditText commentText;
     private String newsID;
+    private String userName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,15 +90,67 @@ public class NewsActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBlockNetworkLoads(false);
+
+
+        SharedPreferences sp=getSharedPreferences("user-info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        //获取登录状态
+        userName=sp.getString("user_name","none");
+
         setComments();
+        setOnLongClick();
+    }
+
+    private void setOnLongClick() {
+        commentList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                myPopMenu(view,position);
+                return true;
+            }
+        });
+    }
+
+    private void myPopMenu(View v,int position) {
+        PopupMenu popupMenu=new PopupMenu(NewsActivity.this,v);
+        popupMenu.getMenuInflater().inflate(R.menu.comment_menu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                String submitReportURL="http://8.129.27.254:8000/submitreport?";
+                String commitName=commentLinkedList.get(position).getName();
+                String commitContent=commentLinkedList.get(position).getContent();
+                submitReportURL+="newsid="+newsID+"&username="+commitName+"&content="+commitContent;
+                OkHttpClient client= MainActivity.okHttpClient;
+                Request request=new Request.Builder()
+                        .get()
+                        .url(submitReportURL)
+                        .build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("kwwl","onFailure"+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(NewsActivity.this,"举报成功",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                return true;
+            }
+        });
+        popupMenu.show();
     }
 
     private void submitComment() {
         AlertDialog.Builder dialog= new AlertDialog.Builder(this);
-        SharedPreferences sp=getSharedPreferences("user-info", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sp.edit();
-        //获取登录状态
-        String userName=sp.getString("user_name","none");
         //如果没有登录
         if (userName.equals("none")){
             dialog.setTitle("错误");

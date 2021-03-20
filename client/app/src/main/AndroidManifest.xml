@@ -15,19 +15,19 @@
         android:theme="@style/Theme.Client">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".ui.news.NewsActivity"></activity>
-        <activity android:name=".UserManagerActivity"></activity>
-        <activity android:name=".TeamNewsActivity"></activity>
-        <activity android:name=".FollowPickActivity"></activity>
+        <activity android:name=".LoginActivity" android:label="登陆"></activity>
+        <activity android:name=".RegisterActivity" android:label="注册"></activity>
+        <activity android:name=".ui.news.NewsActivity" android:label="新闻"></activity>
+        <activity android:name=".UserManagerActivity" android:label="管理"></activity>
+        <activity android:name=".TeamNewsActivity" android:label="新闻"></activity>
+        <activity android:name=".FollowPickActivity" android:label="关注"></activity>
     </application>
 
 </manifest>

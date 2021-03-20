@@ -1,6 +1,7 @@
 package com.example.client.ui.follows;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.client.FollowPickActivity;
@@ -84,7 +86,43 @@ public class ZhongChaoFollowFragment extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(getActivity(),"已关注",Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder dialog=new AlertDialog.Builder(getContext());
+                                    dialog.setMessage("您已经关注了该球队，是否需要取消关注");
+                                    dialog.setTitle("警告");
+                                    dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            String disfollowURL="http://8.129.27.254:8000/disfollow?username="+username+"&teamname="+mData.get(position).getTeamName();
+                                            Request request1=new Request.Builder()
+                                                    .get()
+                                                    .url(disfollowURL)
+                                                    .build();
+                                            okHttpClient.newCall(request1).enqueue(new Callback() {
+                                                @Override
+                                                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                                    Log.d("kwwl","onFailure"+e.toString());
+                                                }
+
+                                                @Override
+                                                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                                    getActivity().runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(getContext(),"取消成功",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    dialog.show();
                                 }
                             });
 
