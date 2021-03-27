@@ -4,6 +4,56 @@ import pymysql
 from sshtunnel import SSHTunnelForwarder
 from flask_cors import CORS
 
+import os
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+encoder = OneHotEncoder()
+forest_clf = RandomForestClassifier(n_estimators=100, n_jobs=-1, min_samples_leaf=1)
+
+
+# print(soc_data.head())
+
+
+def getResult(data):
+    # home team win
+    if data['FT Team 1'] > data['FT Team 2']:
+        return 1
+    # home team loss
+    elif data['FT Team 1'] < data['FT Team 2']:
+        return -1
+    # tie
+    elif data['FT Team 1'] == data['FT Team 2']:
+        return 0
+
+
+def train():
+    soc_data = pd.read_csv('soccer.csv')
+    if 'result' in soc_data:
+        soc_data.drop(columns=['result'], inplace=True)
+    soc_data['result'] = soc_data.apply(getResult, axis=1)
+
+    soc_data.drop(
+        columns=['Round', 'Date', 'FT', 'HT', 'Year', 'Country', 'FT Team 1', 'FT Team 2', 'HT Team 1', 'HT Team 2',
+                 'GGD',
+                 'Team 1 (pts)', 'Team 2 (pts)'], inplace=True)
+
+    y = soc_data['result']
+    X = soc_data.drop(columns=['result'])
+
+    X_tr = encoder.fit_transform(X)
+
+    X_soc_train, X_soc_test, y_soc_train, y_soc_test = train_test_split(X_tr, y, test_size=0.2, random_state=42)
+
+    forest_clf.fit(X_soc_train, y_soc_train)
+    print('fit succsess')
+
+
+train()
+
 # # 使用ssh远程连接云服务器
 # server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
 #                             ssh_username="root",
@@ -553,7 +603,8 @@ def publish():
     cursor.execute(sql)
     news_id = cursor.fetchall()
 
-    sql = 'INSERT INTO `news_tag` (`TAG_ID`, `NEWS_ID`, `TAG`) VALUES (NULL, \'%s\', \'%s\')' % (news_id[0][0], news_object)
+    sql = 'INSERT INTO `news_tag` (`TAG_ID`, `NEWS_ID`, `TAG`) VALUES (NULL, \'%s\', \'%s\')' % (
+        news_id[0][0], news_object)
     print(sql)
     cursor.execute(sql)
     db.commit()
@@ -837,6 +888,20 @@ def hello():
 @app.route('/goodbye')
 def goodbye():
     return 'goodbye!'
+
+
+@app.route('/predict', methods=['get'])
+def predict():
+    team1 = request.values.get('team1')
+    team2 = request.values.get('team2')
+    team1+=' '
+    team2+=' '
+    print(team1)
+    print(team2)
+    teamsInput = encoder.transform([[team1, team2]])
+    prediction = forest_clf.predict(teamsInput)
+    result = {'result': int(prediction[0])}
+    return json.dumps(result, ensure_ascii=False)
 
 
 if __name__ == '__main__':

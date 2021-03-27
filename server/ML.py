@@ -1,46 +1,53 @@
+import os
 import pandas as pd
-import numpy as np
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 
-DATAPATH = "housing.csv"
-data = pd.read_csv(DATAPATH)
-
-
-def split_train_test(data, test_ratio):
-    np.random.seed(42)
-    shuffled_indices = np.random.permutation(len(data))
-    test_set_size = int(len(data) * test_ratio)
-    test_indices = shuffled_indices[:test_set_size]
-    train_indices = shuffled_indices[test_set_size:]
-    return data.iloc[train_indices], data.iloc[test_indices]
+encoder = OneHotEncoder()
+forest_clf = RandomForestClassifier(n_estimators=100, n_jobs=-1, min_samples_leaf=1)
 
 
-train_set, test_set = split_train_test(data, 0.2)
-print(len(test_set), len(train_set))
-
-data["income_cat"] = pd.cut(data["median_income"],
-                            bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
-                            labels=[1, 2, 3, 4, 5])
-data["income_cat"].hist()
-
-rooms_ix, bedrooms_ix, population_ix, household_ix = 3, 4, 5, 6
+# print(soc_data.head())
 
 
-class ComnimedAttributsAdder(BaseEstimator, TransFormerMixin):
-    def __init__(self, add_bedrooms_per_room=True):
-        self.add_bedrooms_per_room = add_bedrooms_per_room
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X, y=None):
-        rooms_per_household = X[:, rooms_ix] / X[:, household_ix]
-        population_per_household = X[:, population_ix] / X[:, household_ix]
-        if self.add_bedrooms_per_room:
-            bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
-            return np.c_[X, rooms_per_household, population_per_household, bedrooms_per_room]
-        else:
-            return np.c_[X, rooms_per_household, population_per_household]
+def getResult(data):
+    # home team win
+    if data['FT Team 1'] > data['FT Team 2']:
+        return 1
+    # home team loss
+    elif data['FT Team 1'] < data['FT Team 2']:
+        return -1
+    # tie
+    elif data['FT Team 1'] == data['FT Team 2']:
+        return 0
 
 
-attr_adder = ComnimedAttributsAdder(add_bedrooms_per_room=False)
-housing_extra_attribs = attr_adder.transform(housing.values)
+def train():
+    soc_data = pd.read_csv('soccer.csv')
+    if 'result' in soc_data:
+        soc_data.drop(columns=['result'], inplace=True)
+    soc_data['result'] = soc_data.apply(getResult, axis=1)
+
+    soc_data.drop(
+        columns=['Round', 'Date', 'FT', 'HT', 'Year', 'Country', 'FT Team 1', 'FT Team 2', 'HT Team 1', 'HT Team 2',
+                 'GGD',
+                 'Team 1 (pts)', 'Team 2 (pts)'], inplace=True)
+
+    y = soc_data['result']
+    X = soc_data.drop(columns=['result'])
+
+    X_tr = encoder.fit_transform(X)
+
+    X_soc_train, X_soc_test, y_soc_train, y_soc_test = train_test_split(X_tr, y, test_size=0.2, random_state=42)
+
+    forest_clf.fit(X_soc_train, y_soc_train)
+    print('fit succsess')
+
+
+if __name__ == '__main__':
+    train()
+    # team1 = encoder.transform([['Liverpool FC ', 'Sheffield Wednesday FC ']])
+    # predict = forest_clf.predict(team1)
+    # print(predict)
+
