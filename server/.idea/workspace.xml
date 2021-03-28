@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Capture001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Capture002.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ML.py" beforeDir="false" afterPath="$PROJECT_DIR$/ML.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../张轶翔毕业论文.doc" beforeDir="false" afterPath="$PROJECT_DIR$/../张轶翔毕业论文.doc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../论文模板.doc" beforeDir="false" afterPath="$PROJECT_DIR$/../论文模板.doc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/babel-loader/4141930d2f6f9f2678c62ce78aad1f8e.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/babel-loader/4141930d2f6f9f2678c62ce78aad1f8e.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/babel-loader/fb3b593a97517e9e17a13752821b9d67.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/babel-loader/fb3b593a97517e9e17a13752821b9d67.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/074a3cb9c3e9fee1c282af71e054fd07.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/074a3cb9c3e9fee1c282af71e054fd07.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/5afa167beaf1fba4ac431fb602295d87.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/5afa167beaf1fba4ac431fb602295d87.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/945d7dcb53eee785c949b778b1ec7f55.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/945d7dcb53eee785c949b778b1ec7f55.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/bfdc85e9683306de2f4f8c6fad27cbdc.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/bfdc85e9683306de2f4f8c6fad27cbdc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/ea8b903f790e22e90336239eb8b1d56d.json" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/node_modules/.cache/vue-loader/ea8b903f790e22e90336239eb8b1d56d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/src/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/src/pages/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/src/pages/publish.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../website/dqdfrontend1/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../website/dqdfrontend1/src/router/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

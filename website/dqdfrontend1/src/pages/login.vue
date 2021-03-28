@@ -67,12 +67,14 @@
 				// }).catch((err)=>{
 				// 	console.log("登录接口报错",err);
 				// })
-				this.$axios.get("http://8.129.27.254:8000/checkmanageruser",{username:this.account,pwd:this.password}).then((res)=>{
+				this.$axios.get("http://8.129.27.254:8000/checkmanageruser",{params:{username:this.account,pwd:this.password}}).then((res)=>{
 					console.log(res);
-					if(res.status==1){
+					if(res.data==1){
 						//媒体账户
-					}else if(res.status==0){
+						window.location.href="http://8.129.27.254/publish/editor.html"
+					}else if(res.data==0){
 						//管理员
+						this.$router.push("/home")
 					}else{
 						//普通用户
 						this.$message({

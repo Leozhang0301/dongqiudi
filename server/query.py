@@ -52,7 +52,7 @@ def train():
     print('fit succsess')
 
 
-train()
+# train()
 
 # # 使用ssh远程连接云服务器
 # server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
@@ -284,6 +284,83 @@ def submitReport():
     return '成功'
 
 
+# 删除举报  举报不成功管理员不删除评论
+# 只有举报表被删除
+# 方法：GET
+# 参数： id 举报id
+# 返回：成功
+@app.route('/cancelreport', methods=['GET'])
+def cancelreport():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    report_id = request.values.get('id')
+
+    sql = 'delete from report where report_id = %s' % report_id
+    cursor.execute(sql)
+    db.commit()
+
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
+
+
+# 删除评论  举报成功管理员删除评论
+# 举报表和评论表都会删除
+# 方法：GET
+# 参数： id 举报id
+# 返回：成功
+@app.route('/deletecomment', methods=['GET'])
+def deletecomment():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    report_id = request.values.get('id')
+
+    sql = 'delete from comment where comment_id=(select comment_id from report where report_id =%s)' % report_id
+    cursor.execute(sql)
+    sql = 'delete from report where report_id = %s' % report_id
+    cursor.execute(sql)
+
+    db.commit()
+
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
+
+
 # 提交评论
 # 方法：GET
 # 参数：newsID 新闻id
@@ -352,7 +429,7 @@ def getComments():
     cursor = db.cursor()
 
     newsID = request.values.get('news')
-    sql = 'SELECT * FROM `comment` WHERE NEWS_ID=\'%s\'' % newsID
+    sql = 'SELECT * FROM `comment` WHERE NEWS_ID=\'%s\' order by time desc' % newsID
     cursor.execute(sql)
     datas = cursor.fetchall()
     results = []
@@ -370,6 +447,86 @@ def getComments():
     db.close()
     server.close()
     return json.dumps(results, ensure_ascii=False)
+
+
+# 获取举报列表 用于管理员页面
+# 方法：GET
+# 参数：无
+# 返回：json
+@app.route('/getreports', methods=['get'])
+def getreports():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+
+    sql = 'SELECT comment.USER_NAME,comment.CONTENT,comment.TIME,report.REPORT_ID,news.NEWS_TITLE FROM comment,report,' \
+          'news WHERE report.COMMENT_ID=comment.COMMENT_ID AND comment.NEWS_ID=news.NEWS_ID '
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    results = []
+    for data in datas:
+        dict = {'ID': data[3], '新闻标题': data[4], '评论内容': data[1], '用户名': data[0], '评论时间': str(data[2])}
+        results.append(dict)
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
+
+# 删除新闻 用于管理员页面
+# 方法：GET
+# 参数：id newsid
+# 返回：成功
+@app.route('/deletenews', methods=['get'])
+def deletenews():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    newsid = request.values.get('id')
+    sql = 'delete from news where NEWS_ID=%s' % newsid
+    cursor.execute(sql)
+    sql = 'delete from news_tag where NEWS_ID=%s' % newsid
+    cursor.execute(sql)
+    sql = 'delete from comment where NEWS_ID=%s' % newsid
+    cursor.execute(sql)
+    db.commit()
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return '成功'
 
 
 # 通过用户名获得新闻列表
@@ -409,16 +566,32 @@ def getnewsbyusername():
         sql = 'SELECT NEWS_ID FROM `news_tag` WHERE TAG=\'%s\'' % tag
         cursor.execute(sql)
         datas = cursor.fetchall()
+        sql = 'select * from news where news_id in ('
         if datas != ():
+            i = 0
             for data in datas:
-                # print(data[0])
-                sql = 'SELECT * FROM `news` WHERE NEWS_ID=%s' % data[0]
-                # print(sql)
-                cursor.execute(sql)
-                newsGeted = cursor.fetchall()
-                # print(newsGeted)
-                dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4],
-                        'ID': newsGeted[0][0]}
+                # # print(data[0])
+                # sql = 'SELECT * FROM `news` WHERE NEWS_ID=%s' % data[0]
+                # # print(sql)
+                # cursor.execute(sql)
+                # newsGeted = cursor.fetchall()
+                # # print(newsGeted)
+                # dict = {'标题': newsGeted[0][1], '内容': newsGeted[0][2], '时间': str(newsGeted[0][3]), '封面': newsGeted[0][4],
+                #         'ID': newsGeted[0][0]}
+                # results.append(dict)
+                if i != len(datas) - 1:
+                    sql += str(data[0]) + ','
+                    i += 1
+                else:
+                    sql += str(data[0]) + ') order by publish_data desc'
+            print(sql)
+            cursor.execute(sql)
+            newsGeted = cursor.fetchall()
+            for item in newsGeted:
+                dict = {'标题': item[1], '内容': item[2], '时间': str(item[3]),
+                        '封面': item[4],
+                        'ID': item[0]}
+                print(dict)
                 results.append(dict)
         # print(results)
 
@@ -498,7 +671,7 @@ def getNews():
                          database='dongqiudi')
 
     cursor = db.cursor()
-    sql = "select * from news"
+    sql = "select * from news order by publish_data desc"
     cursor.execute(sql)
     datas = cursor.fetchall()
     results = []
@@ -890,12 +1063,16 @@ def goodbye():
     return 'goodbye!'
 
 
+# 预测比赛结果
+# 参数：team1 主队
+#      team2 客队
+# 返回结果
 @app.route('/predict', methods=['get'])
 def predict():
     team1 = request.values.get('team1')
     team2 = request.values.get('team2')
-    team1+=' '
-    team2+=' '
+    team1 += ' '
+    team2 += ' '
     print(team1)
     print(team2)
     teamsInput = encoder.transform([[team1, team2]])
