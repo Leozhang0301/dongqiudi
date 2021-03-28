@@ -52,7 +52,7 @@ def train():
     print('fit succsess')
 
 
-# train()
+train()
 
 # # 使用ssh远程连接云服务器
 # server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
@@ -1078,7 +1078,7 @@ def predict():
     teamsInput = encoder.transform([[team1, team2]])
     prediction = forest_clf.predict(teamsInput)
     result = {'result': int(prediction[0])}
-    return json.dumps(result, ensure_ascii=False)
+    return str(prediction[0])
 
 
 if __name__ == '__main__':
