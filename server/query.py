@@ -1085,3 +1085,4 @@ if __name__ == '__main__':
     # 上传服务器时要将host改成0.0.0.0
     # 调试的时候host使用127.0.0.1
     app.run(debug=True, port=8000, host='0.0.0.0')
+

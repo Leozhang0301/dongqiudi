@@ -25,6 +25,23 @@ cursor = db.cursor()
 # data = cursor.fetchall()
 # print(data[0][0])
 
+# 中超改名hash表
+hash_map = {'广州': '广州恒大淘宝',
+            '北京国安': '北京中赫国安',
+            '上海海港': '上海上港',
+            '山东泰山': '山东鲁能泰山',
+            '重庆两江竞技': '重庆当代',
+            '上海申花': '上海绿地申花',
+            '长春亚泰': '江苏苏宁',
+            '河南嵩山龙门': '河南建业',
+            '青岛': '青岛黄海青港',
+            '河北': '河北华夏幸福',
+            '沧州雄狮': '石家庄永昌',
+            '武汉': '武汉卓尔',
+            '大连人': '大连人',
+            '深圳': '深圳佳兆业',
+            '天津津门虎': '天津泰达',
+            '广州城': '广州富力'}
 
 # url和表明对应  分别对应英超，意甲，西甲，德甲
 url = ("https://www.dongqiudi.com/data/1",
@@ -52,12 +69,7 @@ for num in range(5):
     html = requests.get(url=url[num], headers=headers)
 
     soup = BeautifulSoup(html.text, 'lxml')
-    # 只有中超标签属性是group-td 其他联赛是td
-    if num != 4:
-        datas = soup.find_all(class_='td')
-    else:
-        final = soup.find(class_='group-con')
-        datas = final.find_all(class_='group-td')
+    datas = soup.find_all(class_='td')
     for data in datas:
         items = data.find_all('span')
         i = 0
@@ -97,11 +109,11 @@ for num in range(5):
             #     cursor.execute(sql)
             #     db.commit()
         # print(dic)
-        # 中超队名找b标签 其他联赛找第二个span标签
-        if num != 4:
-            name = data.span.next_sibling.text
-        else:
-            name = data.find('b').text
+
+        name = data.span.next_sibling.text
+        # 如果是中超队名需要转换hash表
+        if num == 4:
+            name = hash_map[name]
         sql = "select TEAM_ID from team where NAME=\'%s\'" % name
         cursor.execute(sql)
         data = cursor.fetchall()
