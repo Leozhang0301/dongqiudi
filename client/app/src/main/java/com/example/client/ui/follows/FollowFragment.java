@@ -10,15 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.client.FollowPickActivity;
 import com.example.client.LoginActivity;
@@ -50,7 +47,6 @@ public class FollowFragment extends Fragment {
     private Button loginBtn;
     private SharedPreferences sharedPreferences;
     private TextView userNickName;
-    private ImageButton imageButton;
     private Button followBtn;
     private List<NewsItem> newsItems;
     private NewsItemAdapter itemAdapter;
@@ -88,8 +84,7 @@ public class FollowFragment extends Fragment {
             newslist=(ListView)root.findViewById(R.id.followed_news);
             followBtn=(Button)root.findViewById(R.id.follow_btn);
             followBtn2=(Button)root.findViewById(R.id.follow_btn2);
-            imageButton=(ImageButton) root.findViewById(R.id.user_icon);
-            imageButton.setOnClickListener(new View.OnClickListener() {
+            userNickName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent();

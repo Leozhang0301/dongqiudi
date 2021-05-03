@@ -45,24 +45,6 @@ public class UserManagerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_user_manager);
-        imageView=(ImageView)findViewById(R.id.imageView);
-
-        userOptions=(ListView)findViewById(R.id.user_options);
-        ArrayAdapter<String>adapter=new ArrayAdapter<String>(this,R.layout.layout_user_manager_options,R.id.option,options);
-        userOptions.setAdapter(adapter);
-        userOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0://选择本地照片
-                        showChosePicDialog();
-                        break;
-                    case 1://拍照
-                        break;
-                }
-
-            }
-        });
         logOffbtn=(Button)findViewById(R.id.logoff);
         logOffbtn.setOnClickListener(new View.OnClickListener() {
             @Override

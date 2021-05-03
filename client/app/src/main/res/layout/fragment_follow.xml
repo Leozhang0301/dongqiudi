@@ -6,28 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.follows.FollowFragment">
 
-    <ImageButton
-        android:id="@+id/user_icon"
-        android:layout_width="54dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:src="@mipmap/ic_launcher_round"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/user_nick_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/user_icon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -70,6 +60,7 @@
         android:id="@+id/follow_btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/login_button"
         android:text="+ 关注"
@@ -78,6 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/followed_news"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toEndOf="@+id/user_nick_name" />
+        app:layout_constraintStart_toEndOf="@+id/user_nick_name"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
