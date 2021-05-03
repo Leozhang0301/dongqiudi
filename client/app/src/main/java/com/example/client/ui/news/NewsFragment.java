@@ -88,8 +88,8 @@ public class NewsFragment extends Fragment {
 
     private void bannerData() {
         ArrayList<String> image=new ArrayList<>();
-        image.add("https://www.niwoxuexi.com/statics/images/nougat_bg.png");
-        image.add("https://www.niwoxuexi.com/statics/images/nougat_bg.png");
+        image.add("http://yjq-fiies.oss-cn-beijing.aliyuncs.com/imgs/dongqiudi/hjyHKEnnNp.jpg");
+        image.add("http://yjq-fiies.oss-cn-beijing.aliyuncs.com/imgs/dongqiudi/MQxbwtxYWW.jpg");
 
         xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
