@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:label="登陆"></activity>
+        <activity android:name=".LoginActivity" android:label="登录"></activity>
         <activity android:name=".RegisterActivity" android:label="注册"></activity>
         <activity android:name=".ui.news.NewsActivity" android:label="新闻"></activity>
         <activity android:name=".UserManagerActivity" android:label="管理"></activity>

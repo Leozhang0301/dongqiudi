@@ -1,7 +1,6 @@
 package com.example.client.ui.ranking;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,8 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
 import com.example.client.MainActivity;
 import com.example.client.R;
 import com.example.client.TeamNewsActivity;
@@ -33,7 +30,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -55,7 +51,7 @@ public class ZhongChaoRankFragment extends Fragment {
     };
     private JSONArray jsonArray;
 
-    private List<RankItem> rankItemList;
+    private List<RankItem> ZCRankItems =new LinkedList<>();;
     private RankItemAdapter rankItemAdapter;
     private ListView listView;
     @Nullable
@@ -65,8 +61,14 @@ public class ZhongChaoRankFragment extends Fragment {
         listView=root.findViewById(R.id.rank_team);
         team_icon=root.findViewById(R.id.team_icon);
         leagueRule=root.findViewById(R.id.league_rules);
-        rankItemList=new LinkedList<>();
-        GetData();
+
+        if (ZCRankItems.isEmpty()){
+            GetData();
+        }else {
+            rankItemAdapter=new RankItemAdapter((LinkedList<RankItem>) ZCRankItems,getActivity());
+            listView.setAdapter(rankItemAdapter);
+            getListViewSelfHeight(listView);
+        }
         setRule();
         setListOnClickListener();
         //加入数据
@@ -83,7 +85,7 @@ public class ZhongChaoRankFragment extends Fragment {
                 Intent intent=new Intent();
                 Bundle bundle=new Bundle();
                 bundle.putInt("position",position);
-                RankItem item=(RankItem)rankItemList.get(position);
+                RankItem item=(RankItem) ZCRankItems.get(position);
                 bundle.putString("team",item.getQiudui());
                 intent.putExtras(bundle);
                 intent.setClass(getActivity(), TeamNewsActivity.class);
@@ -150,11 +152,11 @@ public class ZhongChaoRankFragment extends Fragment {
                                 String jifen=jsonObject.getString("积分");
                                 //获得队标
                                 String icon_url ="http://8.129.27.254/image/team_icon/"+qiudui+".png";
-                                rankItemList.add(new RankItem(paiming,icon_url,qiudui,changci,sheng,ping,fu,jinqiu,shiqiu,jifen));
+                                ZCRankItems.add(new RankItem(paiming,icon_url,qiudui,changci,sheng,ping,fu,jinqiu,shiqiu,jifen));
                                 Log.d("kwwl",jsonObject.toString());
 
                             }
-                            rankItemAdapter=new RankItemAdapter((LinkedList<RankItem>)rankItemList,getActivity());
+                            rankItemAdapter=new RankItemAdapter((LinkedList<RankItem>) ZCRankItems,getActivity());
                             listView.setAdapter(rankItemAdapter);
                             getListViewSelfHeight(listView);
                         } catch (JSONException e) {

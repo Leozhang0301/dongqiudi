@@ -155,7 +155,7 @@ public class NewsActivity extends AppCompatActivity {
         if (userName.equals("none")){
             dialog.setTitle("错误");
             dialog.setMessage("还没有登录哦~");
-            dialog.setPositiveButton("去登陆", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton("去登录", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     intent.setClass(NewsActivity.this, LoginActivity.class);
@@ -199,7 +199,9 @@ public class NewsActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                             commentText.setText("");
-                            //刷新评论列表
+                            //清楚列表重新获取评论
+                            commentLinkedList.clear();
+                            commentAdapter.notifyDataSetChanged();
                             setComments();
                         }
                     });
