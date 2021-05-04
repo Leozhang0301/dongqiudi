@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.client.FollowListActivity;
 import com.example.client.FollowPickActivity;
 import com.example.client.LoginActivity;
 import com.example.client.MainActivity;
@@ -123,7 +124,7 @@ public class FollowFragment extends Fragment {
                                         @Override
                                         public void onClick(View v) {
                                             Intent intent=new Intent();
-                                            intent.setClass(getActivity(), FollowPickActivity.class);
+                                            intent.setClass(getActivity(), FollowListActivity.class);
                                             startActivity(intent);
                                         }
                                     });

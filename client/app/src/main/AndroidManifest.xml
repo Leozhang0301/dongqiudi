@@ -28,6 +28,8 @@
         <activity android:name=".UserManagerActivity" android:label="管理"></activity>
         <activity android:name=".TeamNewsActivity" android:label="新闻"></activity>
         <activity android:name=".FollowPickActivity" android:label="关注"></activity>
+        <activity android:name=".FollowListActivity" android:label="关注列表"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

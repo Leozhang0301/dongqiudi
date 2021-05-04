@@ -1081,8 +1081,46 @@ def predict():
     return str(prediction[0])
 
 
+# 关注球队列表
+# 参数：username 用户id
+# 返回json 球队列表
+@app.route('/getfollowed', methods=['get'])
+def getFollowed():
+    # 获取请求
+    # 使用ssh远程连接云服务器
+    server = SSHTunnelForwarder(ssh_address_or_host=("8.129.27.254", 22),
+                                ssh_username="root",
+                                ssh_password="4p6DxcEy9PPu@K*",
+                                remote_bind_address=("localhost", 3306))
+    server.start()
+
+    print(server.local_bind_port)
+
+    # host必须是127.0.0.1
+    db = pymysql.connect(host='127.0.0.1',
+                         port=server.local_bind_port,
+                         user='dongqiudi',
+                         password='dqdleo',
+                         database='dongqiudi')
+
+    cursor = db.cursor()
+    userName = request.values.get('username')
+    sql = 'SELECT team.NAME from team,follow,user WHERE follow.TEAM_ID=team.TEAM_ID and follow.USER_ID=user.USER_ID and user.NAME=\'%s\''%userName
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    results = []
+    for data in datas:
+        result = {'队名': data[0]}
+        results.append(result)
+
+    # 关闭数据库连接
+    cursor.close()
+    db.close()
+    server.close()
+    return json.dumps(results, ensure_ascii=False)
+
+
 if __name__ == '__main__':
     # 上传服务器时要将host改成0.0.0.0
     # 调试的时候host使用127.0.0.1
     app.run(debug=True, port=8000, host='0.0.0.0')
-

@@ -39,7 +39,7 @@ import okhttp3.Response;
 public class MatchesFragment extends Fragment {
     private ListView matchesList;
     private String URL="http://8.129.27.254:8000/getmatches";
-    private List<MatchItem> matchItems;
+    private List<MatchItem> matchItems=new LinkedList<>();
     private MatchItemAdapter matchItemAdapter;
     private JSONArray jsonArray;
     private ImageView homeTeamIcon;
@@ -52,10 +52,16 @@ public class MatchesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root=inflater.inflate(R.layout.fragment_matches,container,false);
         matchesList=(ListView)root.findViewById(R.id.matches_list);
-        matchItems=new LinkedList<>();
+
         homeTeamIcon=(ImageView)root.findViewById(R.id.home_team_icon);
         awayTeamIcon=(ImageView)root.findViewById(R.id.away_team_icon);
-        GetData();
+        if (matchItems.isEmpty()){
+            GetData();
+        }
+        else {
+            matchItemAdapter=new MatchItemAdapter((LinkedList<MatchItem>)matchItems,getActivity());
+            matchesList.setAdapter(matchItemAdapter);
+        }
         return root;
 
     }

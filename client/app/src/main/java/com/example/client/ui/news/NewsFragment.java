@@ -88,8 +88,11 @@ public class NewsFragment extends Fragment {
 
     private void bannerData() {
         ArrayList<String> image=new ArrayList<>();
+        ArrayList<String> title=new ArrayList<>();
         image.add("http://yjq-fiies.oss-cn-beijing.aliyuncs.com/imgs/dongqiudi/hjyHKEnnNp.jpg");
         image.add("http://yjq-fiies.oss-cn-beijing.aliyuncs.com/imgs/dongqiudi/MQxbwtxYWW.jpg");
+        title.add("第1个新闻标题");
+        title.add("第2个新闻标题");
 
         xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
@@ -99,7 +102,7 @@ public class NewsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        xBanner.setData(image,null);
+        xBanner.setData(image,title);
         xBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
@@ -108,6 +111,7 @@ public class NewsFragment extends Fragment {
                         .into((ImageView)view);
             }
         });
+        xBanner.setPointPosition(XBanner.RIGHT);
     }
 
     //加载新闻列表
