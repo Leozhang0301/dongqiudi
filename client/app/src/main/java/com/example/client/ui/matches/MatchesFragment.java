@@ -1,16 +1,19 @@
 package com.example.client.ui.matches;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -62,8 +65,59 @@ public class MatchesFragment extends Fragment {
             matchItemAdapter=new MatchItemAdapter((LinkedList<MatchItem>)matchItems,getActivity());
             matchesList.setAdapter(matchItemAdapter);
         }
+        setClick();
         return root;
 
+    }
+
+    private void setClick() {
+        matchesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String homeTeam=matchItems.get(position).getHomeTeam();
+                String awayTeam=matchItems.get(position).getAwayTeam();
+                OkHttpClient okHttpClient=MainActivity.okHttpClient;
+                Request request1=new Request.Builder()
+                        .get()
+                        .url("http://8.129.27.254:8000/predict?team1=FC%20Barcelona&team2=Atl%C3%A9tico%20Madrid")
+                        .build();
+                okHttpClient.newCall(request1).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("kwwl","onFailure"+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        AlertDialog.Builder dialog=new AlertDialog.Builder(getContext());
+                        String respon=response.body().string();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                if (respon.equals("1")){
+                                    dialog.setMessage(homeTeam+" 胜 "+awayTeam);
+                                }else if (respon.equals("-1")){
+                                    dialog.setMessage(homeTeam+" 负 "+awayTeam);
+                                }else if (respon.equals("0")){
+                                    dialog.setMessage(homeTeam+" 平 "+awayTeam);
+                                }
+                                dialog.setTitle("结果");
+                                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.show();
+                            }
+                        });
+
+
+                    }
+                });
+            }
+        });
     }
 
     private void GetData() {
