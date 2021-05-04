@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10ba6cc4-a05d-4748-8a2b-52b49acf3145" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/FollowListActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/followed_list_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/followed_list_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/follows/FollowFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/matches/MatchesFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/java/com/example/client/ui/news/NewsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/app/src/main/res/layout/fragment_follow.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/query.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

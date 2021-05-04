@@ -42,6 +42,7 @@ public class FollowListActivity extends AppCompatActivity {
     private JSONArray jsonArray;
     private FollowListAdapter followListAdapter;
     private LinkedList<TeamFollowItem> mData=null;
+    private OkHttpClient okHttpClient;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class FollowListActivity extends AppCompatActivity {
         goFollow=findViewById(R.id.gofollow);
         listView=findViewById(R.id.follow_team_list);
         sharedPreferences=getSharedPreferences("user-info", Context.MODE_PRIVATE);
+        okHttpClient=MainActivity.okHttpClient;
         mData=new LinkedList<TeamFollowItem>();
         URL+=sharedPreferences.getString("user_name","none");
         goFollow.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,34 @@ public class FollowListActivity extends AppCompatActivity {
     }
 
     private void SetClick() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String disfollowURL="http://8.129.27.254:8000/disfollow?username="+sharedPreferences.getString("user_name","none")+"&teamname="+mData.get(position).getTeamName();
+                Request request1=new Request.Builder()
+                        .get()
+                        .url(disfollowURL)
+                        .build();
+                okHttpClient.newCall(request1).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.d("kwwl","onFailure"+e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(FollowListActivity.this,"取消成功",Toast.LENGTH_SHORT).show();
+                                mData.remove(position);
+                                followListAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     private void GetData() {
