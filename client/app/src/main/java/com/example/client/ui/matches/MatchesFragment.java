@@ -102,7 +102,7 @@ public class MatchesFragment extends Fragment {
                                 }else if (respon.equals("0")){
                                     dialog.setMessage(homeTeam+" 平 "+awayTeam);
                                 }
-                                dialog.setTitle("结果");
+                                dialog.setTitle("比赛预测");
                                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

@@ -94,6 +94,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor=sp.edit();
                                 editor.putString("user_name",nameText);
                                 editor.commit();
+
+
                             }
                         }
                     });
@@ -141,8 +143,11 @@ public class RegisterActivity extends AppCompatActivity {
                     repwd.setText("");
                     name.setText("");
                 }else if (code==3){
-                    Intent intent=new Intent();
-                    intent.setClass(RegisterActivity.this,MainActivity.class);
+//                    Intent intent=new Intent();
+//                    intent.setClass(RegisterActivity.this,MainActivity.class);
+//                    startActivity(intent);
+                    Intent intent = new Intent();
+                    intent.setClass(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else if (code==4){
                     name.setText("");
